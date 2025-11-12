@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Meta base -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visiting World — Viajes, Destinos y Promociones</title>
+  <meta name="description" content="Explora destinos internacionales, descubre promociones destacadas, socios estratégicos y solicita cotizaciones personalizadas con Visiting World.">
+  <link rel="canonical" href="https://www.visitingworld.example/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Visiting World — Viajes, Destinos y Promociones">
+  <meta property="og:description" content="Descubre destinos, promociones, aliados y cotiza tu viaje ideal con Visiting World.">
+  <meta property="og:image" content="assets/promos/roma.jpg">
+  <meta property="og:url" content="https://www.visitingworld.example/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icono -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
+
+  <!-- Fuentes (Bebas Neue para títulos / Poppins para cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos / Swiper / Estilos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Datos estructurados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Visiting World",
+    "url": "https://www.visitingworld.example/",
+    "description": "Agencia de viajes con destinos internacionales, promociones y cotización personalizada.",
+    "logo": "https://www.visitingworld.example/logo.png",
+    "sameAs": [
+      "https://facebook.com/visitingworld",
+      "https://instagram.com/visitingworld"
+    ],
+    "areaServed": "Worldwide"
+  }
+  </script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-wrap">
+      <div class="logo"><i class="fa-solid fa-globe"></i> Visiting World</div>
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#destinos">Destinos</a>
+        <a href="#promos">Promociones</a>
+        <a href="#socios">Socios</a>
+        <a href="#contacto">Contáctanos</a>
+        <button class="btn-sm" id="btnCotizarTop" type="button"><i class="fa-solid fa-paper-plane"></i> Cotizar</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <video autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>Explora el mundo con Visiting World</h1>
+      <p>Viaja, descubre y vive experiencias únicas con nuestros destinos internacionales.</p>
+      <div class="cta">
+        <a href="#destinos" class="btn btn-primary"><i class="fa-solid fa-globe"></i> Explorar destinos</a>
+        <button id="btnCotizacionHero" class="btn btn-outline" type="button"><i class="fa-solid fa-bolt"></i> Cotización</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINOS -->
+  <section id="destinos" class="section">
+    <div class="background-slider">
+    <div class="slide-track">
+      <img src="assets/img/background/bg1.jpg" alt="Paisaje 1">
+      <img src="assets/img/background/bg2.jpg" alt="Paisaje 2">
+      <img src="assets/img/background/bg3.jpg" alt="Paisaje 3">
+      <img src="assets/img/background/bg4.jpg" alt="Paisaje 4">
+      <img src="assets/img/background/bg5.jpg" alt="Paisaje 5">
+      <img src="assets/img/background/bg6.jpg" alt="Paisaje 6">
+      <img src="assets/img/background/bg7.jpg" alt="Paisaje 7">
+      <img src="assets/img/background/bg8.jpg" alt="Paisaje 8">
+
+      <!-- se repiten para lograr bucle infinito -->
+      <img src="assets/img/background/bg1.jpg" alt="Paisaje 1">
+      <img src="assets/img/background/bg2.jpg" alt="Paisaje 2">
+      <img src="assets/img/background/bg3.jpg" alt="Paisaje 3">
+      <img src="assets/img/background/bg4.jpg" alt="Paisaje 4">
+      <img src="assets/img/background/bg5.jpg" alt="Paisaje 5">
+      <img src="assets/img/background/bg6.jpg" alt="Paisaje 6">
+      <img src="assets/img/background/bg7.jpg" alt="Paisaje 7">
+      <img src="assets/img/background/bg8.jpg" alt="Paisaje 8">
+
+    </div>
+  </div>
+    <div class="container">
+      <div class="section-head">
+        <h2>Destinos por región y país</h2>
+        <p class="muted">Selecciona tu región favorita y conoce los destinos disponibles.</p>
+      </div>
+      <div class="filters">
+        <select class="select" id="regionFilter">
+          <option value="all">Todas las regiones</option>
+        </select>
+        <input class="input" id="countrySearch" placeholder="Buscar país o ciudad...">
+      </div>
+
+      <div id="destinosContainer"></div>
+    </div>
+  </section>
+
+  <!-- PROMOCIONES -->
+  <section id="promos" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Promociones destacadas</h2>
+        <p class="muted">Aprovecha las mejores ofertas para tus próximas vacaciones.</p>
+      </div>
+
+      <div class="swiper">
+        <div class="swiper-wrapper" id="promoSlides"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIOS -->
+  <section id="socios" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Socios estratégicos</h2>
+        <p class="muted">Trabajamos con aliados de primer nivel para ofrecerte experiencias únicas.</p>
+      </div>
+
+      <div class="partners-marquee">
+        <div class="marquee-track">
+          <img src="assets/img/partners/partner.png" alt="partner">
+          <img src="assets/img/partners/partner1.png" alt="partner1">
+          <img src="assets/img/partners/partner2.png" alt="partner2">
+          <img src="assets/img/partners/partner3.png" alt="partner3">
+          <img src="assets/img/partners/partner4.png" alt="partner4">
+          <img src="assets/img/partners/partner5.png" alt="partner5">
+          <img src="assets/img/partners/partner6.png" alt="partner6">
+          <img src="assets/img/partners/partner7.png" alt="partner7">
+          <img src="assets/img/partners/partner8.png" alt="partner8">
+          <img src="assets/img/partners/partner9.png" alt="partner9">
+          <img src="assets/img/partners/partner10.png" alt="partner10">
+          <img src="assets/img/partners/partner11.png" alt="partner11">
+          <img src="assets/img/partners/partner12.png" alt="partner12">
+          
+          <!-- duplicado para loop infinito -->
+          <img src="assets/img/partners/partner.png" alt="partner">
+          <img src="assets/img/partners/partner1.png" alt="partner1">
+          <img src="assets/img/partners/partner2.png" alt="partner2">
+          <img src="assets/img/partners/partner3.png" alt="partner3">
+          <img src="assets/img/partners/partner4.png" alt="partner4">
+          <img src="assets/img/partners/partner5.png" alt="partner5">
+          <img src="assets/img/partners/partner6.png" alt="partner6">
+          <img src="assets/img/partners/partner7.png" alt="partner7">
+          <img src="assets/img/partners/partner8.png" alt="partner8">
+          <img src="assets/img/partners/partner9.png" alt="partner9">
+          <img src="assets/img/partners/partner10.png" alt="partner10">
+          <img src="assets/img/partners/partner11.png" alt="partner11">
+          <img src="assets/img/partners/partner12.png" alt="partner12">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <div class="container contact">
+      <div>
+        <h2>Contáctanos</h2>
+        <p class="muted">¿Listo para tu próximo viaje? Escríbenos y te responderemos de inmediato.</p>
+        <form id="contactForm" novalidate>
+          <div class="row">
+            <input class="input" id="name" name="nombre" placeholder="Nombre" required>
+            <input class="input" id="email" name="email" type="email" placeholder="Correo electrónico" required>
+          </div>
+          <input class="input" id="subject" placeholder="Asunto / Destino">
+          <textarea class="input" id="message" rows="5" placeholder="Mensaje" required></textarea>
+          <div class="row">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensaje</button>
+            <span id="contactFeedback" class="muted"></span>
+          </div>
+        </form>
+      </div>
+      <aside>
+        <h3><span class="flag">📞</span> Atención rápida</h3>
+        <p class="muted">Contáctanos en redes sociales o WhatsApp y obtén respuesta inmediata.</p>
+        <div class="row">
+          <a class="btn btn-outline" href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+          <a class="btn btn-outline" href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a class="btn btn-outline" href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer">
+      <p>© <span id="year"></span> Visiting World — Todos los derechos reservados</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALES -->
+  <div class="modal" id="modalDetalles" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-x" data-close="modalDetalles"><i class="fa-solid fa-xmark"></i></button>
+
+      <div id="panelDetalle">
+        <img class="modal-media" id="detalleImg" alt="">
+        <div class="modal-body">
+          <h3 id="detalleTitulo"></h3>
+          <p class="muted" id="detalleDescripcion"></p>
+          <div class="modal-actions">
+            <button class="btn btn-outline" id="detallePDF"><i class="fa-regular fa-file-pdf"></i> Ver PDF</button>
+            <button class="btn btn-primary" id="detalleCotizar"><i class="fa-solid fa-bolt"></i> Pedir cotización</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="panelPDF" class="hidden">
+        <div class="modal-body">
+          <button class="btn btn-outline" id="pdfVolver">← Volver</button>
+          <a id="pdfAbrirNueva" target="_blank" class="muted">Abrir en nueva pestaña</a>
+        </div>
+        <iframe id="pdfFrame" style="width:100%;height:70vh;border:0;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalCotizar" aria-hidden="true">
+    <div class="modal-card" style="max-width:560px">
+      <button class="close-x" data-close="modalCotizar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-body">
+        <h3>Solicitud de cotización</h3>
+        <p class="muted" id="cotizarDestinoLbl"></p>
+        <form id="quoteForm" novalidate>
+          <input class="input" id="qNombre" placeholder="Nombre" required>
+          <input class="input" id="qEmail" type="email" placeholder="Correo" required>
+          <input class="input" id="qDestino" placeholder="Destino" required>
+          <div class="row">
+            <input class="input" id="qFecha" type="date">
+            <input class="input" id="qPersonas" type="number" min="1" value="2">
+          </div>
+          <textarea class="input" id="qNotas" rows="3" placeholder="Preferencias"></textarea>
+          <div class="row">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+            <span id="quoteFeedback" class="muted"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón arriba -->
+  <button class="to-top" id="toTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

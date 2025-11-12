@@ -1,0 +1,314 @@
+{
+  "destinos": [
+    {
+      "region": "Europa",
+      "country": "Francia",
+      "flag": "🇫🇷",
+      "items": [
+        {
+          "city": "París",
+          "img": "assets/img/destinos/paris.jpg",
+          "desc": "Ciudad luz, arte y gastronomía.",
+          "pdf": "assets/pdf/Francia_Paris.pdf"
+        },
+        {
+          "city": "Niza",
+          "img": "assets/img/destinos/niza.jpg",
+          "desc": "Riviera francesa de aguas turquesa.",
+          "pdf": "assets/pdf/Francia_Niza.pdf"
+        },
+        {
+          "city": "Lyon",
+          "img": "assets/img/destinos/lyon.jpg",
+          "desc": "Capital gastronómica de Francia.",
+          "pdf": "assets/pdf/Francia_Lyon.pdf"
+        }
+      ]
+    },
+    {
+      "region": "Europa",
+      "country": "Italia",
+      "flag": "🇮🇹",
+      "items": [
+        {
+          "city": "Roma",
+          "img": "assets/img/destinos/roma.jpg",
+          "desc": "Historia viva y dolce vita.",
+          "pdf": "assets/pdf/Italia_Roma.pdf"
+        },
+        {
+          "city": "Venecia",
+          "img": "assets/img/destinos/venecia.jpg",
+          "desc": "Canales y romanticismo eterno.",
+          "pdf": "assets/pdf/Italia_Venecia.pdf"
+        },
+        {
+          "city": "Florencia",
+          "img": "assets/img/destinos/florencia.jpg",
+          "desc": "Cuna del Renacimiento.",
+          "pdf": "assets/pdf/Italia_Florencia.pdf"
+        }
+      ]
+    },
+    {
+      "region": "Europa",
+      "country": "España",
+      "flag": "🇪🇸",
+      "items": [
+        {
+          "city": "Madrid",
+          "img": "assets/img/destinos/madrid.jpg",
+          "desc": "Museos, tapeo y vida nocturna.",
+          "pdf": "assets/pdf/Espana_Madrid.pdf"
+        },
+        {
+          "city": "Barcelona",
+          "img": "assets/img/destinos/barcelona.jpg",
+          "desc": "Gaudí, mar y modernismo.",
+          "pdf": "assets/pdf/Espana_Barcelona.pdf"
+        },
+        {
+          "city": "Sevilla",
+          "img": "assets/img/destinos/sevilla.jpg",
+          "desc": "Tradición, flamenco y azahar.",
+          "pdf": "assets/pdf/Espana_Sevilla.pdf"
+        }
+      ]
+    },
+    {
+      "region": "América",
+      "country": "Colombia",
+      "flag": "🇨🇴",
+      "items": [
+        {
+          "city": "Bogotá",
+          "img": "assets/img/destinos/Bogota.jpg",
+          "desc": "Biodiversidad única del planeta.",
+          "pdf": "assets/pdf/Colombia_Bogota.pdf"
+        },
+        {
+          "city": "Medellín",
+          "img": "assets/img/destinos/medellin.jpg",
+          "desc": "Centro histórico Patrimonio Mundial.",
+          "pdf": "assets/pdf/Colombia_Medellin.pdf"
+        }
+
+      ]
+    },
+    {
+      "region": "América",
+      "country": "Ecuador",
+      "flag": "🇪🇨",
+      "items": [
+        {
+          "city": "Galápagos",
+          "img": "assets/img/destinos/galapagos.jpg",
+          "desc": "Biodiversidad única del planeta.",
+          "pdf": "assets/pdf/Ecuador_Galapagos.pdf"
+        },
+        {
+          "city": "Quito",
+          "img": "assets/img/destinos/quito.jpg",
+          "desc": "Centro histórico Patrimonio Mundial.",
+          "pdf": "assets/pdf/Ecuador_Quito.pdf"
+        },
+        {
+          "city": "Cuenca",
+          "img": "assets/img/destinos/cuenca.jpg",
+          "desc": "Arquitectura colonial y ríos.",
+          "pdf": "assets/pdf/Ecuador_Cuenca.pdf"
+        }
+      ]
+    },
+    {
+      "region": "América",
+      "country": "Perú",
+      "flag": "🇵🇪",
+      "items": [
+        {
+          "city": "Cusco",
+          "img": "assets/img/destinos/cusco.jpg",
+          "desc": "Capital del Imperio Inca.",
+          "pdf": "assets/pdf/Peru_Cusco.pdf"
+        },
+        {
+          "city": "Lima",
+          "img": "assets/img/destinos/lima.jpg",
+          "desc": "Gastronomía de clase mundial.",
+          "pdf": "assets/pdf/Peru_Lima.pdf"
+        }
+      ]
+    },
+    {
+      "region": "América",
+      "country": "México",
+      "flag": "🇲🇽",
+      "items": [
+        {
+          "city": "Cancún",
+          "img": "assets/img/destinos/cancun.jpg",
+          "desc": "Caribe mexicano y resorts.",
+          "pdf": "assets/pdf/Mexico_Cancun.pdf"
+        },
+        {
+          "city": "Ciudad de México",
+          "img": "assets/img/destinos/cdmx.jpg",
+          "desc": "Cultura, museos y barrios icónicos.",
+          "pdf": "assets/pdf/Mexico_CDMX.pdf"
+        },
+        {
+          "city": "Playa del Carmen",
+          "img": "assets/img/destinos/playa-del-carmen.jpg",
+          "desc": "Playas y vida nocturna.",
+          "pdf": "assets/pdf/Mexico_PlayaDelCarmen.pdf"
+        }
+      ]
+    },
+    {
+      "region": "Asia",
+      "country": "Japón",
+      "flag": "🇯🇵",
+      "items": [
+        {
+          "city": "Tokio",
+          "img": "assets/img/destinos/tokio.jpg",
+          "desc": "Megaciudad futurista.",
+          "pdf": "assets/pdf/Japon_Tokio.pdf"
+        },
+        {
+          "city": "Kioto",
+          "img": "assets/img/destinos/kioto.jpg",
+          "desc": "Templos, geishas y jardines.",
+          "pdf": "assets/pdf/Japon_Kioto.pdf"
+        },
+        {
+          "city": "Osaka",
+          "img": "assets/img/destinos/osaka.jpg",
+          "desc": "Street food y castillo.",
+          "pdf": "assets/pdf/Japon_Osaka.pdf"
+        }
+      ]
+    },
+    {
+      "region": "Asia",
+      "country": "Tailandia",
+      "flag": "🇹🇭",
+      "items": [
+        {
+          "city": "Bangkok",
+          "img": "assets/img/destinos/bangkok.jpg",
+          "desc": "Templos dorados y mercados.",
+          "pdf": "assets/pdf/Tailandia_Bangkok.pdf"
+        },
+        {
+          "city": "Phuket",
+          "img": "assets/img/destinos/phuket.jpg",
+          "desc": "Playas, islas y vida tropical.",
+          "pdf": "assets/pdf/Tailandia_Phuket.pdf"
+        }
+      ]
+    },
+    {
+      "region": "África",
+      "country": "Egipto",
+      "flag": "🇪🇬",
+      "items": [
+        {
+          "city": "El Cairo",
+          "img": "assets/img/destinos/elcairo.jpg",
+          "desc": "Pirámides, historia y misterio.",
+          "pdf": "assets/pdf/Egipto_ElCairo.pdf"
+        },
+        {
+          "city": "Luxor",
+          "img": "assets/img/destinos/luxor.jpg",
+          "desc": "Templos del Nilo y tesoros faraónicos.",
+          "pdf": "assets/pdf/Egipto_Luxor.pdf"
+        }
+      ]
+    },
+    {
+      "region": "África",
+      "country": "Sudáfrica",
+      "flag": "🇿🇦",
+      "items": [
+        {
+          "city": "Ciudad del Cabo",
+          "img": "assets/img/destinos/ciudad-del-cabo.jpg",
+          "desc": "Montaña de la Mesa y costa atlántica.",
+          "pdf": "assets/pdf/Sudafrica_CiudadDelCabo.pdf"
+        },
+        {
+          "city": "Johannesburgo",
+          "img": "assets/img/destinos/johannesburgo.jpg",
+          "desc": "Centro financiero y cultural.",
+          "pdf": "assets/pdf/Sudafrica_Johannesburgo.pdf"
+        }
+      ]
+    },
+    {
+      "region": "Oceanía",
+      "country": "Australia",
+      "flag": "🇦🇺",
+      "items": [
+        {
+          "city": "Sídney",
+          "img": "assets/img/destinos/sidney.jpg",
+          "desc": "Ópera icónica y playas vibrantes.",
+          "pdf": "assets/pdf/Australia_Sidney.pdf"
+        },
+        {
+          "city": "Melbourne",
+          "img": "assets/img/destinos/melbourne.jpg",
+          "desc": "Cultura, arte y café mundial.",
+          "pdf": "assets/pdf/Australia_Melbourne.pdf"
+        }
+      ]
+    },
+    {
+      "region": "Oceanía",
+      "country": "Nueva Zelanda",
+      "flag": "🇳🇿",
+      "items": [
+        {
+          "city": "Auckland",
+          "img": "assets/img/destinos/auckland.jpg",
+          "desc": "Naturaleza y modernidad.",
+          "pdf": "assets/pdf/NuevaZelanda_Auckland.pdf"
+        },
+        {
+          "city": "Queenstown",
+          "img": "assets/img/destinos/queenstown.jpg",
+          "desc": "Capital mundial de la aventura.",
+          "pdf": "assets/pdf/NuevaZelanda_Queenstown.pdf"
+        }
+      ]
+    }
+  ],
+  "promos": [
+    {
+      "title": "Roma romántica",
+      "img": "assets/img/promos/roma.jpg",
+      "text": "Historia, arte y gastronomía.",
+      "price": "desde $899",
+      "linkPDF": "assets/pdf/Italia_Roma.pdf",
+      "destino": "Roma, Italia"
+    },
+    {
+      "title": "Quito histórico",
+      "img": "assets/img/promos/quito.jpg",
+      "text": "Capital patrimonial.",
+      "price": "desde $299",
+      "linkPDF": "assets/pdf/Ecuador_Quito.pdf",
+      "destino": "Quito, Ecuador"
+    },
+    {
+      "title": "París soñado",
+      "img": "assets/img/promos/paris.jpg",
+      "text": "La ciudad luz.",
+      "price": "desde $999",
+      "linkPDF": "assets/pdf/Francia_Paris.pdf",
+      "destino": "París, Francia"
+    }
+  ]
+}
