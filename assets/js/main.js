@@ -35,6 +35,7 @@ const qDestinoInput = document.getElementById("qDestino");
 const promoSlides = document.getElementById("promoSlides");
 const btnCotizarTop = document.getElementById("btnCotizarTop");
 const btnCotizacionHero = document.getElementById("btnCotizacionHero");
+const heroVideo = document.getElementById("heroVideo");
 
 /* Formularios de cotización */
 const quoteForm = document.getElementById("quoteForm");
@@ -52,6 +53,89 @@ if (quoteSubmitBtn && !quoteSubmitBtn.dataset.originalMarkup) {
 
 // El modal de detalle no utiliza la equis de cierre incluida en el HTML.
 modalDetalles?.querySelector(".close-x")?.remove();
+
+/* -------------------------------------------------------------------------- */
+/* Hero animado generado con canvas                                           */
+/* -------------------------------------------------------------------------- */
+if (heroVideo) {
+  heroVideo.classList.add("is-paused");
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  const canStream = ctx && typeof canvas.captureStream === "function";
+
+  if (!canStream) {
+    heroVideo.classList.add("is-paused");
+  } else {
+    const width = 1280;
+    const height = 720;
+    canvas.width = width;
+    canvas.height = height;
+
+    const stream = canvas.captureStream(30);
+    heroVideo.srcObject = stream;
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    heroVideo.playsInline = true;
+
+    const ensurePlaying = () => {
+      const playPromise = heroVideo.play();
+      if (playPromise?.catch) playPromise.catch(() => {});
+    };
+
+    heroVideo.addEventListener("loadedmetadata", ensurePlaying, { once: true });
+    heroVideo.addEventListener("play", () => heroVideo.classList.remove("is-paused"));
+    heroVideo.addEventListener("pause", () => heroVideo.classList.add("is-paused"));
+
+    const drawFrame = (time) => {
+      const t = time / 1000;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const baseGradient = ctx.createLinearGradient(0, 0, width, height);
+      baseGradient.addColorStop(0, `hsl(${(205 + Math.sin(t * 0.6) * 18 + 360) % 360}, 72%, 34%)`);
+      baseGradient.addColorStop(0.55, `hsl(${(190 + Math.cos(t * 0.45) * 24 + 360) % 360}, 68%, 38%)`);
+      baseGradient.addColorStop(1, `hsl(${(170 + Math.sin(t * 0.35) * 20 + 360) % 360}, 60%, 36%)`);
+      ctx.fillStyle = baseGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      for (let i = 0; i < 3; i += 1) {
+        const phase = t * (0.3 + i * 0.1);
+        const centerX = width * (0.3 + i * 0.25 + Math.sin(phase) * 0.08);
+        const centerY = height * (0.4 + Math.cos(phase * 1.3) * 0.12);
+        const radius = height * (0.55 + i * 0.12);
+
+        const glow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+        glow.addColorStop(0, `hsla(${(220 + i * 28 + t * 20) % 360}, 85%, 68%, 0.55)`);
+        glow.addColorStop(0.6, `hsla(${(200 + i * 22 + t * 12) % 360}, 72%, 58%, 0.32)`);
+        glow.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, 0, width, height);
+      }
+
+      const waveHeight = height * 0.18;
+      const waveOffset = t * 1.4;
+      ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+
+      for (let x = 0; x <= width; x += 16) {
+        const progress = (x / width) * Math.PI * 2;
+        const y = height - waveHeight + Math.sin(progress + waveOffset) * 22;
+        ctx.lineTo(x, y);
+      }
+
+      ctx.lineTo(width, height);
+      ctx.closePath();
+      ctx.fill();
+
+      requestAnimationFrame(drawFrame);
+    };
+
+    ensurePlaying();
+    requestAnimationFrame(drawFrame);
+  }
+}
 
 /* -------------------------------------------------------------------------- */
 /* Estado y datos cargados desde el JSON                                    */
