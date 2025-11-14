@@ -344,7 +344,7 @@ button:focus-visible,
    DESTINOS
 ============================================================ */
 #destinos {
-  --destinos-gap: clamp(8rem, 16vw, 10rem);
+  --destinos-gap: clamp(5rem, 12vw, 7.5rem);
   position: relative;
   isolation: isolate;
   color: var(--surface);
@@ -352,7 +352,7 @@ button:focus-visible,
   overflow: hidden;
   min-height: 100vh;
   margin-top: var(--destinos-gap);
-  padding: clamp(11rem, 18vw, 15rem) 0 clamp(6rem, 12vw, 8.5rem);
+  padding: clamp(8.5rem, 15vw, 12rem) 0 clamp(5rem, 10vw, 7rem);
 }
 
 #destinos::before {
@@ -369,8 +369,8 @@ button:focus-visible,
   top: 0;
   left: 0;
   right: 0;
-  height: clamp(4.5rem, 12vw, 8rem);
-  background: linear-gradient(180deg, rgba(5, 17, 27, 0.65) 0%, rgba(5, 17, 27, 0.35) 55%, rgba(5, 17, 27, 0));
+  height: clamp(3rem, 9vw, 6rem);
+  background: linear-gradient(180deg, rgba(5, 17, 27, 0.38) 0%, rgba(5, 17, 27, 0.22) 55%, rgba(5, 17, 27, 0));
   z-index: 5;
   pointer-events: none;
 }
@@ -389,7 +389,7 @@ button:focus-visible,
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 22, 35, 0.04), rgba(8, 22, 35, 0.18));
+  background: linear-gradient(180deg, rgba(8, 22, 35, 0.03), rgba(8, 22, 35, 0.12));
 }
 
 #destinos .background-slider .slide-track {
@@ -495,12 +495,12 @@ button:focus-visible,
   background: rgba(12, 32, 47, 0.65);
 }
 
-:is(.grid-destinos, #destinosContainer, .country-group .grid-destinos) {
+:is(.grid-destinos, .country-group .grid-destinos) {
   position: relative;
   z-index: 30;
   display: grid;
-  justify-items: center;
-  align-items: stretch;
+  justify-items: stretch;
+  align-items: start;
   gap: clamp(1.2rem, 4vw, 2.3rem);
   margin-top: 1.6rem;
   width: 100%;
@@ -508,20 +508,27 @@ button:focus-visible,
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+#destinosContainer {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.4rem, 6vw, 3.4rem);
+  width: 100%;
+  align-items: stretch;
+}
+
 @media (max-width: 1024px) {
-  :is(.grid-destinos, #destinosContainer, .country-group .grid-destinos) {
+  :is(.grid-destinos, .country-group .grid-destinos) {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  :is(.grid-destinos, #destinosContainer, .country-group .grid-destinos) {
+  :is(.grid-destinos, .country-group .grid-destinos) {
     grid-template-columns: 1fr;
   }
 }
 
 .country-group {
-  margin-bottom: clamp(2rem, 5vw, 3rem);
   text-align: center;
 }
 
@@ -574,7 +581,6 @@ button:focus-visible,
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 380px;
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(244, 246, 251, 0.9));
   border-radius: clamp(1.6rem, 4vw, 2rem);
   box-shadow: var(--shadow-soft);
@@ -586,6 +592,11 @@ button:focus-visible,
 .card {
   min-height: 420px;
   height: 100%;
+}
+
+.grid-destinos .card {
+  max-width: 380px;
+  margin: 0 auto;
 }
 
 .card:hover,
@@ -620,7 +631,17 @@ button:focus-visible,
   text-align: left;
 }
 
-.card-body { flex: 1; }
+.card-body {
+  flex: 1;
+}
+
+.card-body > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-start;
+}
 
 .card-body h4,
 .promo-info h3 {
