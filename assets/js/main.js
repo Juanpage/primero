@@ -144,6 +144,7 @@ let DATA = { destinos: [], promos: [] };
 
 let activeModal = null;
 let lastFocusedTrigger = null;
+let contactFeedbackTimeoutId;
 
 /* -------------------------------------------------------------------------- */
 /* Utilidades de feedback y lectura de campos                               */
@@ -529,10 +530,22 @@ pdfVolver?.addEventListener("click", ()=>{
 // Form de contacto
 contactForm?.addEventListener("submit", (e)=>{
   e.preventDefault();
+
+  const form = e.currentTarget;
+  form.reset();
+
   if (contactFeedback) {
-    contactFeedback.textContent = "✅ Mensaje enviado correctamente.";
+    clearTimeout(contactFeedbackTimeoutId);
+
+    contactFeedback.textContent = "Mensaje enviado correctamente.";
+    contactFeedback.classList.remove("is-error");
+    contactFeedback.classList.add("is-visible", "is-success");
+
+    contactFeedbackTimeoutId = window.setTimeout(()=>{
+      contactFeedback.classList.remove("is-visible", "is-success");
+      contactFeedback.textContent = "";
+    }, 5000);
   }
-  e.target.reset();
 });
 
 // Form de cotización

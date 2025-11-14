@@ -180,32 +180,55 @@
 
   <!-- CONTACTO -->
   <section id="contacto" class="section">
-    <div class="container contact">
-      <div>
-        <h2>Contáctanos</h2>
-        <p class="muted">¿Listo para tu próximo viaje? Escríbenos y te responderemos de inmediato.</p>
-        <form id="contactForm" novalidate>
-          <div class="row">
-            <input class="input" id="name" name="nombre" placeholder="Nombre" required>
-            <input class="input" id="email" name="email" type="email" placeholder="Correo electrónico" required>
+    <div class="container">
+      <div class="contact">
+        <article class="contact-panel contact-form-panel">
+          <div class="contact-panel-head">
+            <h2>Contáctanos</h2>
+            <p class="muted">¿Listo para tu próximo viaje? Escríbenos y te responderemos de inmediato.</p>
           </div>
-          <input class="input" id="subject" placeholder="Asunto / Destino">
-          <textarea class="input" id="message" rows="5" placeholder="Mensaje" required></textarea>
-          <div class="row">
-            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensaje</button>
-            <span id="contactFeedback" class="muted"></span>
+          <form id="contactForm" novalidate>
+            <div class="row">
+              <input class="input" id="name" name="nombre" placeholder="Nombre" required>
+              <input class="input" id="email" name="email" type="email" placeholder="Correo electrónico" required>
+            </div>
+            <input class="input" id="subject" placeholder="Asunto / Destino">
+            <textarea class="input" id="message" rows="5" placeholder="Mensaje" required></textarea>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensaje</button>
+              <p id="contactFeedback" class="contact-feedback" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </article>
+        <aside class="contact-panel contact-quick-panel">
+          <div class="contact-quick-head">
+            <div class="contact-quick-icon" aria-hidden="true">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <div>
+              <h3>Atención rápida</h3>
+              <p class="muted">Contáctanos en redes sociales o WhatsApp y obtén respuesta inmediata.</p>
+            </div>
           </div>
-        </form>
+          <div class="contact-quick-body">
+            <p class="contact-quick-note">Nuestro equipo responde en menos de una hora durante el horario laboral.</p>
+            <div class="contact-channels">
+              <a class="contact-channel contact-channel--whatsapp" href="https://wa.me/593999999999?text=Hola%20Visiting%20World%2C%20deseo%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener">
+                <span class="contact-channel-main"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</span>
+                <span class="contact-channel-meta">Escríbenos ahora <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+              </a>
+              <a class="contact-channel contact-channel--instagram" href="https://instagram.com/visitingworld" target="_blank" rel="noopener">
+                <span class="contact-channel-main"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram</span>
+                <span class="contact-channel-meta">Síguenos <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+              </a>
+              <a class="contact-channel contact-channel--facebook" href="https://facebook.com/visitingworld" target="_blank" rel="noopener">
+                <span class="contact-channel-main"><i class="fa-brands fa-facebook" aria-hidden="true"></i> Facebook</span>
+                <span class="contact-channel-meta">Chatea con nosotros <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+              </a>
+            </div>
+          </div>
+        </aside>
       </div>
-      <aside>
-        <h3><span class="flag">📞</span> Atención rápida</h3>
-        <p class="muted">Contáctanos en redes sociales o WhatsApp y obtén respuesta inmediata.</p>
-        <div class="row">
-          <a class="btn btn-outline" href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-          <a class="btn btn-outline" href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-          <a class="btn btn-outline" href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
-        </div>
-      </aside>
     </div>
   </section>
 
