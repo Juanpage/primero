@@ -44,8 +44,21 @@ const quoteFeedbackEl = document.getElementById("quoteFeedback");
 const qNombreInput = document.getElementById("qNombre");
 const quoteSubmitBtn = quoteForm?.querySelector("button[type='submit'], input[type='submit']");
 const contactSubmitBtn = contactForm?.querySelector("button[type='submit'], input[type='submit']");
-const FORM_SUBMIT_ENDPOINT = "https://formsubmit.co/ajax/commercial@visitingalapagos.com";
 const FORM_SUBMIT_CC = "webmaster@visitingalapagos.com";
+const FORM_SUBMIT_CLEARABLE_FIELDS = [
+  "Nombre",
+  "Correo",
+  "_replyto",
+  "Asunto",
+  "Mensaje",
+  "Destino",
+  "Fecha",
+  "Personas",
+  "Preferencias",
+  "_subject",
+  "_template",
+  "_captcha"
+];
 
 if (quoteSubmitBtn && !quoteSubmitBtn.dataset.originalMarkup) {
   if (quoteSubmitBtn.tagName === "BUTTON") {
@@ -297,9 +310,17 @@ const setHiddenInputValue = (form, name, value = "") => {
 const submitViaHiddenRelay = (entries = []) => {
   if (!formSubmitRelay) return false;
 
+  FORM_SUBMIT_CLEARABLE_FIELDS.forEach((name) => {
+    setHiddenInputValue(formSubmitRelay, name, "");
+  });
+
   entries.forEach(([name, value]) => {
     setHiddenInputValue(formSubmitRelay, name, value);
   });
+
+  if (FORM_SUBMIT_CC) {
+    setHiddenInputValue(formSubmitRelay, "_cc", FORM_SUBMIT_CC);
+  }
 
   try {
     formSubmitRelay.submit();
@@ -307,33 +328,6 @@ const submitViaHiddenRelay = (entries = []) => {
   } catch (err) {
     console.error("No se pudo ejecutar el formulario oculto de respaldo", err);
     return false;
-  }
-};
-
-const submitFormSubmitRequest = async (formData, { contextLabel = "el formulario" } = {}) => {
-  if (formData && FORM_SUBMIT_CC) {
-    formData.set("_cc", FORM_SUBMIT_CC);
-  }
-
-  const entries = Array.from(formData.entries());
-
-  try {
-    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) throw new Error(`Estado inesperado: ${response.status}`);
-
-    await response.json().catch(() => ({}));
-    return { ok: true, usedFallback: false };
-  } catch (err) {
-    console.error(`No se pudo enviar ${contextLabel}`, err);
-    const fallbackUsed = submitViaHiddenRelay(entries);
-    return { ok: fallbackUsed, usedFallback: fallbackUsed, error: err };
   }
 };
 
@@ -666,7 +660,7 @@ pdfVolver?.addEventListener("click", ()=>{
 });
 
 // Form de contacto
-contactForm?.addEventListener("submit", async (e) => {
+contactForm?.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const form = e.currentTarget;
@@ -684,17 +678,18 @@ contactForm?.addEventListener("submit", async (e) => {
   setContactFeedback("Enviando mensaje...", "pending");
   setButtonLoadingState(contactSubmitBtn, true, "Enviando...");
 
-  const payload = new FormData();
-  payload.append("Nombre", nombre);
-  payload.append("Correo", correo);
-  payload.append("_replyto", correo);
-  payload.append("Asunto", asunto || "Sin asunto");
-  payload.append("Mensaje", mensaje);
-  payload.append("_subject", `Nuevo mensaje de contacto - ${nombre || "Visiting World"}`);
-  payload.append("_template", "table");
-  payload.append("_captcha", "false");
+  const payloadEntries = [
+    ["Nombre", nombre],
+    ["Correo", correo],
+    ["_replyto", correo],
+    ["Asunto", asunto || "Sin asunto"],
+    ["Mensaje", mensaje],
+    ["_subject", `Nuevo mensaje de contacto - ${nombre || "Visiting World"}`],
+    ["_template", "table"],
+    ["_captcha", "false"]
+  ];
 
-  const { ok } = await submitFormSubmitRequest(payload, { contextLabel: "el mensaje de contacto" });
+  const ok = submitViaHiddenRelay(payloadEntries);
 
   if (ok) {
     form.reset();
@@ -707,7 +702,7 @@ contactForm?.addEventListener("submit", async (e) => {
 });
 
 // Form de cotización
-quoteForm?.addEventListener("submit", async (e)=>{
+quoteForm?.addEventListener("submit", (e)=>{
   e.preventDefault();
 
   setQuoteFeedback("");
@@ -801,19 +796,20 @@ quoteForm?.addEventListener("submit", async (e)=>{
 
   setQuoteFeedback("Estamos enviando tu solicitud...", false);
 
-  const payload = new FormData();
-  payload.append("Nombre", nombre);
-  payload.append("Correo", correo);
-  payload.append("_replyto", correo);
-  payload.append("Destino", safeDestino);
-  payload.append("Fecha", fecha || "No especificada");
-  payload.append("Personas", personas || "No especificado");
-  payload.append("Preferencias", preferencias || "No especificadas");
-  payload.append("_subject", `Solicitud de cotización - ${safeDestino}`);
-  payload.append("_template", "table");
-  payload.append("_captcha", "false");
+  const payloadEntries = [
+    ["Nombre", nombre],
+    ["Correo", correo],
+    ["_replyto", correo],
+    ["Destino", safeDestino],
+    ["Fecha", fecha || "No especificada"],
+    ["Personas", personas || "No especificado"],
+    ["Preferencias", preferencias || "No especificadas"],
+    ["_subject", `Solicitud de cotización - ${safeDestino}`],
+    ["_template", "table"],
+    ["_captcha", "false"]
+  ];
 
-  const { ok } = await submitFormSubmitRequest(payload, { contextLabel: "la solicitud de cotización" });
+  const ok = submitViaHiddenRelay(payloadEntries);
 
   if (ok) {
     setQuoteFeedback("Su requerimiento fue procesado, pronto una persona se pondrá en contacto contigo.");
