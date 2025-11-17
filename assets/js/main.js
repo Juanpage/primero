@@ -44,6 +44,7 @@ const quoteFeedbackEl = document.getElementById("quoteFeedback");
 const qNombreInput = document.getElementById("qNombre");
 const quoteSubmitBtn = quoteForm?.querySelector("button[type='submit'], input[type='submit']");
 const contactSubmitBtn = contactForm?.querySelector("button[type='submit'], input[type='submit']");
+const FORM_SUBMIT_ENDPOINT = "https://formsubmit.co/ajax/commercial@visitingalapagos.com";
 const FORM_SUBMIT_CC = "webmaster@visitingalapagos.com";
 const FORM_SUBMIT_CLEARABLE_FIELDS = [
   "Nombre",
@@ -57,7 +58,8 @@ const FORM_SUBMIT_CLEARABLE_FIELDS = [
   "Preferencias",
   "_subject",
   "_template",
-  "_captcha"
+  "_captcha",
+  "_cc"
 ];
 
 if (quoteSubmitBtn && !quoteSubmitBtn.dataset.originalMarkup) {
@@ -329,6 +331,58 @@ const submitViaHiddenRelay = (entries = []) => {
     console.error("No se pudo ejecutar el formulario oculto de respaldo", err);
     return false;
   }
+};
+
+const ensureEntry = (list, name, value) => {
+  if (!Array.isArray(list) || !name) return;
+
+  const exists = list.some(([entryName]) => entryName === name);
+  if (!exists) {
+    list.push([name, value]);
+  }
+};
+
+const sendViaFormSubmitAjax = async (entries = []) => {
+  if (typeof fetch !== "function") throw new Error("fetch no está disponible en este navegador");
+  if (!FORM_SUBMIT_ENDPOINT) throw new Error("No hay endpoint configurado");
+
+  const normalizedEntries = Array.isArray(entries) ? [...entries] : [];
+
+  ensureEntry(normalizedEntries, "_template", "table");
+  ensureEntry(normalizedEntries, "_captcha", "false");
+  if (FORM_SUBMIT_CC) ensureEntry(normalizedEntries, "_cc", FORM_SUBMIT_CC);
+
+  const payload = normalizedEntries.reduce((acc, [key, value]) => {
+    if (!key) return acc;
+    acc[key] = typeof value === "string" ? value : value ?? "";
+    return acc;
+  }, {});
+
+  const response = await fetch(FORM_SUBMIT_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`FormSubmit respondió con estado ${response.status}`);
+  }
+
+  let result = {};
+  try {
+    result = await response.json();
+  } catch (err) {
+    throw new Error("No se pudo interpretar la respuesta del servidor");
+  }
+
+  if (result.success !== true && result.success !== "true") {
+    throw new Error(result.message || "El servidor no confirmó el envío");
+  }
+
+  return result;
 };
 
 /* -------------------------------------------------------------------------- */
@@ -660,7 +714,7 @@ pdfVolver?.addEventListener("click", ()=>{
 });
 
 // Form de contacto
-contactForm?.addEventListener("submit", (e) => {
+contactForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const form = e.currentTarget;
@@ -689,7 +743,15 @@ contactForm?.addEventListener("submit", (e) => {
     ["_captcha", "false"]
   ];
 
-  const ok = submitViaHiddenRelay(payloadEntries);
+  let ok = false;
+
+  try {
+    await sendViaFormSubmitAjax(payloadEntries);
+    ok = true;
+  } catch (err) {
+    console.error("Fallo el envío principal del formulario de contacto", err);
+    ok = submitViaHiddenRelay(payloadEntries);
+  }
 
   if (ok) {
     form.reset();
@@ -702,7 +764,7 @@ contactForm?.addEventListener("submit", (e) => {
 });
 
 // Form de cotización
-quoteForm?.addEventListener("submit", (e)=>{
+quoteForm?.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
   setQuoteFeedback("");
@@ -809,7 +871,15 @@ quoteForm?.addEventListener("submit", (e)=>{
     ["_captcha", "false"]
   ];
 
-  const ok = submitViaHiddenRelay(payloadEntries);
+  let ok = false;
+
+  try {
+    await sendViaFormSubmitAjax(payloadEntries);
+    ok = true;
+  } catch (err) {
+    console.error("Fallo el envío principal del formulario de cotización", err);
+    ok = submitViaHiddenRelay(payloadEntries);
+  }
 
   if (ok) {
     setQuoteFeedback("Su requerimiento fue procesado, pronto una persona se pondrá en contacto contigo.");
