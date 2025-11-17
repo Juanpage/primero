@@ -12,6 +12,7 @@ const countrySearch = document.getElementById("countrySearch");
 const toTop = document.getElementById("toTop");
 const contactForm = document.getElementById("contactForm");
 const contactFeedback = document.getElementById("contactFeedback");
+const contactFallbackForm = document.getElementById("contactFallbackForm");
 const navbar = document.querySelector(".navbar");
 const yearEl = document.getElementById("year");
 
@@ -43,6 +44,7 @@ const quoteFeedbackEl = document.getElementById("quoteFeedback");
 const qNombreInput = document.getElementById("qNombre");
 const quoteSubmitBtn = quoteForm?.querySelector("button[type='submit'], input[type='submit']");
 const contactSubmitBtn = contactForm?.querySelector("button[type='submit'], input[type='submit']");
+const FORM_SUBMIT_ENDPOINT = "https://formsubmit.co/ajax/webmaster@visitingalapagos.com";
 
 if (quoteSubmitBtn && !quoteSubmitBtn.dataset.originalMarkup) {
   if (quoteSubmitBtn.tagName === "BUTTON") {
@@ -235,6 +237,44 @@ const setContactFeedback = (message = "", type = "") => {
       contactFeedback.classList.remove("is-visible", "is-success", "is-error");
       contactFeedback.textContent = "";
     }, 6000);
+  }
+};
+
+const setHiddenInputValue = (form, name, value = "") => {
+  if (!form || !name) return null;
+  const controls = form.elements?.namedItem?.(name);
+  let input = controls || null;
+
+  if (!input) {
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    form.appendChild(input);
+  }
+
+  input.value = typeof value === "string" ? value : value ?? "";
+  return input;
+};
+
+const triggerContactFallback = ({ nombre = "", correo = "", asunto = "", mensaje = "" } = {}) => {
+  if (!contactFallbackForm) return false;
+
+  const normalizedAsunto = asunto || "Sin asunto";
+  const normalizedMensaje = mensaje || "(Sin mensaje)";
+
+  setHiddenInputValue(contactFallbackForm, "Nombre", nombre);
+  setHiddenInputValue(contactFallbackForm, "Correo", correo);
+  setHiddenInputValue(contactFallbackForm, "_replyto", correo);
+  setHiddenInputValue(contactFallbackForm, "Asunto", normalizedAsunto);
+  setHiddenInputValue(contactFallbackForm, "Mensaje", normalizedMensaje);
+  setHiddenInputValue(contactFallbackForm, "_subject", `Nuevo mensaje de contacto - ${nombre || "Visiting World"}`);
+
+  try {
+    contactFallbackForm.submit();
+    return true;
+  } catch (err) {
+    console.error("No se pudo ejecutar el formulario de respaldo", err);
+    return false;
   }
 };
 
@@ -610,7 +650,7 @@ contactForm?.addEventListener("submit", async (e) => {
   payload.append("_captcha", "false");
 
   try {
-    const response = await fetch("https://formsubmit.co/ajax/webmaster@visitingalapagos.com", {
+    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
       method: "POST",
       body: payload,
       headers: {
@@ -626,7 +666,12 @@ contactForm?.addEventListener("submit", async (e) => {
     setContactFeedback("Mensaje enviado correctamente.", "success");
   } catch (err) {
     console.error("No se pudo enviar el mensaje de contacto", err);
-    setContactFeedback("No pudimos enviar tu mensaje. Inténtalo nuevamente o escríbenos por WhatsApp.", "error");
+    const fallbackTriggered = triggerContactFallback({ nombre, correo, asunto, mensaje });
+    if (fallbackTriggered) {
+      setContactFeedback("Detectamos un inconveniente y abrimos un formulario alternativo para completar tu envío.", "success");
+    } else {
+      setContactFeedback("No pudimos enviar tu mensaje. Inténtalo nuevamente o escríbenos por WhatsApp.", "error");
+    }
   } finally {
     if (contactSubmitBtn) {
       contactSubmitBtn.removeAttribute("data-loading");
@@ -764,7 +809,7 @@ quoteForm?.addEventListener("submit", async (e)=>{
   let submissionSucceeded = false;
 
   try {
-    const response = await fetch("https://formsubmit.co/ajax/webmaster@visitingalapagos.com", {
+    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
       method: "POST",
       body: payload,
       headers: {
