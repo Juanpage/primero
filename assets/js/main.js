@@ -36,7 +36,7 @@ const qDestinoInput = document.getElementById("qDestino");
 const promoSlides = document.getElementById("promoSlides");
 const btnCotizarTop = document.getElementById("btnCotizarTop");
 const btnCotizacionHero = document.getElementById("btnCotizacionHero");
-const heroVideo = document.getElementById("heroVideo");
+const heroCanvas = document.getElementById("heroCanvas");
 
 /* Formularios de cotización */
 const quoteForm = document.getElementById("quoteForm");
@@ -84,37 +84,32 @@ modalDetalles?.querySelector(".close-x")?.remove();
 /* -------------------------------------------------------------------------- */
 /* Hero animado generado con canvas                                           */
 /* -------------------------------------------------------------------------- */
-if (heroVideo) {
-  heroVideo.classList.add("is-paused");
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  const canStream = ctx && typeof canvas.captureStream === "function";
+if (heroCanvas) {
+  const ctx = heroCanvas.getContext("2d");
 
-  if (!canStream) {
-    heroVideo.classList.add("is-paused");
-  } else {
-    const width = 1280;
-    const height = 720;
-    canvas.width = width;
-    canvas.height = height;
-
-    const stream = canvas.captureStream(30);
-    heroVideo.srcObject = stream;
-    heroVideo.muted = true;
-    heroVideo.defaultMuted = true;
-    heroVideo.playsInline = true;
-
-    const ensurePlaying = () => {
-      const playPromise = heroVideo.play();
-      if (playPromise?.catch) playPromise.catch(() => {});
+  if (ctx) {
+    const state = {
+      width: 1280,
+      height: 720,
     };
 
-    heroVideo.addEventListener("loadedmetadata", ensurePlaying, { once: true });
-    heroVideo.addEventListener("play", () => heroVideo.classList.remove("is-paused"));
-    heroVideo.addEventListener("pause", () => heroVideo.classList.add("is-paused"));
+    const resizeCanvas = () => {
+      const rect = heroCanvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      const width = Math.max(1, Math.round(rect.width || state.width));
+      const height = Math.max(1, Math.round(rect.height || state.height));
+
+      heroCanvas.width = width * ratio;
+      heroCanvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+      state.width = width;
+      state.height = height;
+    };
 
     const drawFrame = (time) => {
       const t = time / 1000;
+      const { width, height } = state;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -159,8 +154,9 @@ if (heroVideo) {
       requestAnimationFrame(drawFrame);
     };
 
-    ensurePlaying();
+    resizeCanvas();
     requestAnimationFrame(drawFrame);
+    window.addEventListener("resize", resizeCanvas);
   }
 }
 
