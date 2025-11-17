@@ -44,7 +44,7 @@ const quoteFeedbackEl = document.getElementById("quoteFeedback");
 const qNombreInput = document.getElementById("qNombre");
 const quoteSubmitBtn = quoteForm?.querySelector("button[type='submit'], input[type='submit']");
 const contactSubmitBtn = contactForm?.querySelector("button[type='submit'], input[type='submit']");
-const FORM_SUBMIT_ENDPOINT = "https://formsubmit.co/ajax/webmaster@visitingalapagos.com";
+const FORM_SUBMIT_ENDPOINT = "https://formsubmit.co/ajax/commercial@visitingalapagos.com";
 
 if (quoteSubmitBtn && !quoteSubmitBtn.dataset.originalMarkup) {
   if (quoteSubmitBtn.tagName === "BUTTON") {
