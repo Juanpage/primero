@@ -42,12 +42,21 @@ const quoteForm = document.getElementById("quoteForm");
 const quoteFeedbackEl = document.getElementById("quoteFeedback");
 const qNombreInput = document.getElementById("qNombre");
 const quoteSubmitBtn = quoteForm?.querySelector("button[type='submit'], input[type='submit']");
+const contactSubmitBtn = contactForm?.querySelector("button[type='submit'], input[type='submit']");
 
 if (quoteSubmitBtn && !quoteSubmitBtn.dataset.originalMarkup) {
   if (quoteSubmitBtn.tagName === "BUTTON") {
     quoteSubmitBtn.dataset.originalMarkup = quoteSubmitBtn.innerHTML;
   } else {
     quoteSubmitBtn.dataset.originalMarkup = quoteSubmitBtn.value || "Enviar";
+  }
+}
+
+if (contactSubmitBtn && !contactSubmitBtn.dataset.originalMarkup) {
+  if (contactSubmitBtn.tagName === "BUTTON") {
+    contactSubmitBtn.dataset.originalMarkup = contactSubmitBtn.innerHTML;
+  } else {
+    contactSubmitBtn.dataset.originalMarkup = contactSubmitBtn.value || "Enviar";
   }
 }
 
@@ -197,6 +206,36 @@ const resolveFieldValue = (form, fallbackSelectors) => {
     }
   }
   return "";
+};
+
+const setContactFeedback = (message = "", type = "") => {
+  if (!contactFeedback) return;
+
+  clearTimeout(contactFeedbackTimeoutId);
+
+  contactFeedback.classList.remove("is-success", "is-error", "is-visible");
+
+  if (!message.trim()) {
+    contactFeedback.textContent = "";
+    return;
+  }
+
+  contactFeedback.textContent = message;
+
+  if (type === "success") {
+    contactFeedback.classList.add("is-success");
+  } else if (type === "error") {
+    contactFeedback.classList.add("is-error");
+  }
+
+  contactFeedback.classList.add("is-visible");
+
+  if (type === "success") {
+    contactFeedbackTimeoutId = window.setTimeout(() => {
+      contactFeedback.classList.remove("is-visible", "is-success", "is-error");
+      contactFeedback.textContent = "";
+    }, 6000);
+  }
 };
 
 /* -------------------------------------------------------------------------- */
@@ -528,23 +567,77 @@ pdfVolver?.addEventListener("click", ()=>{
 });
 
 // Form de contacto
-contactForm?.addEventListener("submit", (e)=>{
+contactForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const form = e.currentTarget;
-  form.reset();
 
-  if (contactFeedback) {
-    clearTimeout(contactFeedbackTimeoutId);
+  const nombre = readFieldValue(form, "nombre", "#name");
+  const correo = readFieldValue(form, "email", "#email");
+  const asunto = readFieldValue(form, "subject", "#subject");
+  const mensaje = readFieldValue(form, "mensaje", "#message");
 
-    contactFeedback.textContent = "Mensaje enviado correctamente.";
-    contactFeedback.classList.remove("is-error");
-    contactFeedback.classList.add("is-visible", "is-success");
+  if (!nombre || !correo || !mensaje) {
+    setContactFeedback("Por favor completa los campos requeridos antes de enviar.", "error");
+    return;
+  }
 
-    contactFeedbackTimeoutId = window.setTimeout(()=>{
-      contactFeedback.classList.remove("is-visible", "is-success");
-      contactFeedback.textContent = "";
-    }, 5000);
+  const setContactSubmitLabel = (btn, label) => {
+    if (!btn) return;
+    if (btn.tagName === "BUTTON") {
+      btn.innerHTML = label;
+    } else {
+      btn.value = label;
+    }
+  };
+
+  setContactFeedback("Enviando mensaje...", "pending");
+
+  if (contactSubmitBtn) {
+    contactSubmitBtn.disabled = true;
+    contactSubmitBtn.setAttribute("data-loading", "true");
+    setContactSubmitLabel(contactSubmitBtn, "Enviando...");
+  }
+
+  const payload = new FormData();
+  payload.append("Nombre", nombre);
+  payload.append("Correo", correo);
+  payload.append("_replyto", correo);
+  payload.append("Asunto", asunto || "Sin asunto");
+  payload.append("Mensaje", mensaje);
+  payload.append("_subject", `Nuevo mensaje de contacto - ${nombre}`);
+  payload.append("_template", "table");
+  payload.append("_captcha", "false");
+
+  try {
+    const response = await fetch("https://formsubmit.co/ajax/webmaster@visitingalapagos.com", {
+      method: "POST",
+      body: payload,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) throw new Error(`Estado inesperado: ${response.status}`);
+
+    await response.json().catch(() => ({}));
+
+    form.reset();
+    setContactFeedback("Mensaje enviado correctamente.", "success");
+  } catch (err) {
+    console.error("No se pudo enviar el mensaje de contacto", err);
+    setContactFeedback("No pudimos enviar tu mensaje. Inténtalo nuevamente o escríbenos por WhatsApp.", "error");
+  } finally {
+    if (contactSubmitBtn) {
+      contactSubmitBtn.removeAttribute("data-loading");
+      contactSubmitBtn.disabled = false;
+      const originalMarkup = contactSubmitBtn.dataset.originalMarkup;
+      if (originalMarkup) {
+        setContactSubmitLabel(contactSubmitBtn, originalMarkup);
+      } else {
+        setContactSubmitLabel(contactSubmitBtn, "Enviar");
+      }
+    }
   }
 });
 
