@@ -12,7 +12,7 @@ const countrySearch = document.getElementById("countrySearch");
 const toTop = document.getElementById("toTop");
 const contactForm = document.getElementById("contactForm");
 const contactFeedback = document.getElementById("contactFeedback");
-const contactFallbackForm = document.getElementById("contactFallbackForm");
+const formSubmitRelay = document.getElementById("formSubmitRelay");
 const navbar = document.querySelector(".navbar");
 const yearEl = document.getElementById("year");
 
@@ -240,10 +240,47 @@ const setContactFeedback = (message = "", type = "") => {
   }
 };
 
+const setButtonLabel = (btn, label) => {
+  if (!btn) return;
+  if (btn.tagName === "BUTTON") {
+    btn.innerHTML = label;
+  } else {
+    btn.value = label;
+  }
+};
+
+const setButtonLoadingState = (btn, isLoading, loadingLabel = "Enviando...") => {
+  if (!btn) return;
+
+  if (isLoading) {
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+    setButtonLabel(btn, loadingLabel);
+    return;
+  }
+
+  btn.removeAttribute("data-loading");
+  btn.disabled = false;
+  const originalMarkup = btn.dataset.originalMarkup;
+  if (originalMarkup) {
+    setButtonLabel(btn, originalMarkup);
+  } else {
+    setButtonLabel(btn, "Enviar");
+  }
+};
+
+const escapeAttrValue = (value = "") => {
+  if (typeof CSS !== "undefined" && typeof CSS.escape === "function") {
+    return CSS.escape(value);
+  }
+  return String(value).replace(/"/g, '\\"');
+};
+
 const setHiddenInputValue = (form, name, value = "") => {
   if (!form || !name) return null;
-  const controls = form.elements?.namedItem?.(name);
-  let input = controls || null;
+
+  const selector = `input[name="${escapeAttrValue(name)}"]`;
+  let input = form.querySelector(selector);
 
   if (!input) {
     input = document.createElement("input");
@@ -256,25 +293,42 @@ const setHiddenInputValue = (form, name, value = "") => {
   return input;
 };
 
-const triggerContactFallback = ({ nombre = "", correo = "", asunto = "", mensaje = "" } = {}) => {
-  if (!contactFallbackForm) return false;
+const submitViaHiddenRelay = (entries = []) => {
+  if (!formSubmitRelay) return false;
 
-  const normalizedAsunto = asunto || "Sin asunto";
-  const normalizedMensaje = mensaje || "(Sin mensaje)";
-
-  setHiddenInputValue(contactFallbackForm, "Nombre", nombre);
-  setHiddenInputValue(contactFallbackForm, "Correo", correo);
-  setHiddenInputValue(contactFallbackForm, "_replyto", correo);
-  setHiddenInputValue(contactFallbackForm, "Asunto", normalizedAsunto);
-  setHiddenInputValue(contactFallbackForm, "Mensaje", normalizedMensaje);
-  setHiddenInputValue(contactFallbackForm, "_subject", `Nuevo mensaje de contacto - ${nombre || "Visiting World"}`);
+  entries.forEach(([name, value]) => {
+    setHiddenInputValue(formSubmitRelay, name, value);
+  });
 
   try {
-    contactFallbackForm.submit();
+    formSubmitRelay.submit();
     return true;
   } catch (err) {
-    console.error("No se pudo ejecutar el formulario de respaldo", err);
+    console.error("No se pudo ejecutar el formulario oculto de respaldo", err);
     return false;
+  }
+};
+
+const submitFormSubmitRequest = async (formData, { contextLabel = "el formulario" } = {}) => {
+  const entries = Array.from(formData.entries());
+
+  try {
+    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) throw new Error(`Estado inesperado: ${response.status}`);
+
+    await response.json().catch(() => ({}));
+    return { ok: true, usedFallback: false };
+  } catch (err) {
+    console.error(`No se pudo enviar ${contextLabel}`, err);
+    const fallbackUsed = submitViaHiddenRelay(entries);
+    return { ok: fallbackUsed, usedFallback: fallbackUsed, error: err };
   }
 };
 
@@ -622,22 +676,8 @@ contactForm?.addEventListener("submit", async (e) => {
     return;
   }
 
-  const setContactSubmitLabel = (btn, label) => {
-    if (!btn) return;
-    if (btn.tagName === "BUTTON") {
-      btn.innerHTML = label;
-    } else {
-      btn.value = label;
-    }
-  };
-
   setContactFeedback("Enviando mensaje...", "pending");
-
-  if (contactSubmitBtn) {
-    contactSubmitBtn.disabled = true;
-    contactSubmitBtn.setAttribute("data-loading", "true");
-    setContactSubmitLabel(contactSubmitBtn, "Enviando...");
-  }
+  setButtonLoadingState(contactSubmitBtn, true, "Enviando...");
 
   const payload = new FormData();
   payload.append("Nombre", nombre);
@@ -645,45 +685,20 @@ contactForm?.addEventListener("submit", async (e) => {
   payload.append("_replyto", correo);
   payload.append("Asunto", asunto || "Sin asunto");
   payload.append("Mensaje", mensaje);
-  payload.append("_subject", `Nuevo mensaje de contacto - ${nombre}`);
+  payload.append("_subject", `Nuevo mensaje de contacto - ${nombre || "Visiting World"}`);
   payload.append("_template", "table");
   payload.append("_captcha", "false");
 
-  try {
-    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
-      method: "POST",
-      body: payload,
-      headers: {
-        Accept: "application/json"
-      }
-    });
+  const { ok } = await submitFormSubmitRequest(payload, { contextLabel: "el mensaje de contacto" });
 
-    if (!response.ok) throw new Error(`Estado inesperado: ${response.status}`);
-
-    await response.json().catch(() => ({}));
-
+  if (ok) {
     form.reset();
     setContactFeedback("Mensaje enviado correctamente.", "success");
-  } catch (err) {
-    console.error("No se pudo enviar el mensaje de contacto", err);
-    const fallbackTriggered = triggerContactFallback({ nombre, correo, asunto, mensaje });
-    if (fallbackTriggered) {
-      setContactFeedback("Detectamos un inconveniente y abrimos un formulario alternativo para completar tu envío.", "success");
-    } else {
-      setContactFeedback("No pudimos enviar tu mensaje. Inténtalo nuevamente o escríbenos por WhatsApp.", "error");
-    }
-  } finally {
-    if (contactSubmitBtn) {
-      contactSubmitBtn.removeAttribute("data-loading");
-      contactSubmitBtn.disabled = false;
-      const originalMarkup = contactSubmitBtn.dataset.originalMarkup;
-      if (originalMarkup) {
-        setContactSubmitLabel(contactSubmitBtn, originalMarkup);
-      } else {
-        setContactSubmitLabel(contactSubmitBtn, "Enviar");
-      }
-    }
+  } else {
+    setContactFeedback("No pudimos enviar tu mensaje. Inténtalo nuevamente o escríbenos por WhatsApp.", "error");
   }
+
+  setButtonLoadingState(contactSubmitBtn, false);
 });
 
 // Form de cotización
@@ -777,20 +792,7 @@ quoteForm?.addEventListener("submit", async (e)=>{
     }
   }
 
-  const setSubmitLabel = (btn, label) => {
-    if (!btn) return;
-    if (btn.tagName === "BUTTON") {
-      btn.innerHTML = label;
-    } else {
-      btn.value = label;
-    }
-  };
-
-  submitBtn?.setAttribute("data-loading", "true");
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    setSubmitLabel(submitBtn, "Enviando...");
-  }
+  setButtonLoadingState(submitBtn, true, "Enviando...");
 
   setQuoteFeedback("Estamos enviando tu solicitud...", false);
 
@@ -806,56 +808,22 @@ quoteForm?.addEventListener("submit", async (e)=>{
   payload.append("_template", "table");
   payload.append("_captcha", "false");
 
-  let submissionSucceeded = false;
+  const { ok } = await submitFormSubmitRequest(payload, { contextLabel: "la solicitud de cotización" });
 
-  try {
-    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
-      method: "POST",
-      body: payload,
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) throw new Error(`Estado inesperado: ${response.status}`);
-
-    await response.json().catch(()=>({}));
-
+  if (ok) {
     setQuoteFeedback("Su requerimiento fue procesado, pronto una persona se pondrá en contacto contigo.");
     form.reset();
-    submissionSucceeded = true;
-  } catch (err) {
-    console.error("No se pudo enviar la solicitud de cotización", err);
+  } else {
     setQuoteFeedback("No pudimos enviar tu solicitud. Inténtalo nuevamente o contáctanos por WhatsApp.", true);
-  } finally {
-    if (qDestinoInput) qDestinoInput.value = safeDestino;
+  }
 
-    if (submitBtn) {
-      submitBtn.removeAttribute("data-loading");
+  if (qDestinoInput) qDestinoInput.value = safeDestino;
 
-      const originalMarkup = submitBtn.dataset.originalMarkup;
-      if (submissionSucceeded) {
-        submitBtn.disabled = false;
-        if (originalMarkup) {
-          if (submitBtn.tagName === "BUTTON") {
-            submitBtn.innerHTML = originalMarkup;
-          } else {
-            submitBtn.value = originalMarkup;
-          }
-        }
-        submitBtn.classList.add("hidden");
-      } else {
-        submitBtn.disabled = false;
-        if (originalMarkup) {
-          if (submitBtn.tagName === "BUTTON") {
-            submitBtn.innerHTML = originalMarkup;
-          } else {
-            submitBtn.value = originalMarkup;
-          }
-        } else {
-          setSubmitLabel(submitBtn, "Enviar");
-        }
-      }
+  setButtonLoadingState(submitBtn, false);
+
+  if (submitBtn) {
+    if (ok) {
+      submitBtn.classList.add("hidden");
     }
   }
 });

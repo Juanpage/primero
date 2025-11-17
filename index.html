@@ -199,13 +199,13 @@
               <p id="contactFeedback" class="contact-feedback" role="status" aria-live="polite"></p>
             </div>
           </form>
-          <iframe name="contactFallbackTarget" id="contactFallbackTarget" class="sr-only" title="Canal alternativo de envío"></iframe>
+          <iframe name="formSubmitRelayTarget" id="formSubmitRelayTarget" class="sr-only" title="Canal alternativo de envío"></iframe>
           <form
-            id="contactFallbackForm"
+            id="formSubmitRelay"
             class="sr-only"
             action="https://formsubmit.co/webmaster@visitingalapagos.com"
             method="POST"
-            target="contactFallbackTarget"
+            target="formSubmitRelayTarget"
             aria-hidden="true"
             tabindex="-1"
           >
@@ -214,6 +214,10 @@
             <input type="hidden" name="_replyto" value="">
             <input type="hidden" name="Asunto" value="">
             <input type="hidden" name="Mensaje" value="">
+            <input type="hidden" name="Destino" value="">
+            <input type="hidden" name="Fecha" value="">
+            <input type="hidden" name="Personas" value="">
+            <input type="hidden" name="Preferencias" value="">
             <input type="hidden" name="_subject" value="Contacto Visiting World">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
