@@ -1,284 +1,232 @@
-const dataUrl = 'assets/data/data.json';
-const destinationsGrid = document.getElementById('destinations-grid');
-const promotionsWrapper = document.getElementById('promotions-wrapper');
-const backgroundEl = document.getElementById('destinations-background');
-const partnerTrack = document.getElementById('partner-track');
-const partnerTrackDuplicate = document.getElementById('partner-track-duplicate');
-const countryFilter = document.getElementById('country-filter');
-const cityFilter = document.getElementById('city-filter');
-
-const destinationModal = document.getElementById('destination-modal');
-const destinationModalBody = document.getElementById('destination-modal-body');
-const quoteModal = document.getElementById('quote-modal');
-const pdfModal = document.getElementById('pdf-modal');
-const pdfFrame = document.getElementById('pdf-frame');
-
-let swiperInstance;
-let backgroundIndex = 0;
-let backgroundImages = [];
-let backgroundInterval;
-let allDestinations = [];
-let filteredDestinations = [];
+const dataUrl = 'assets/data/travel-data.json';
+let catalog = { destinations: [], promotions: [], partners: [] };
+let activeBackgrounds = [];
+let bgTimer;
 
 async function loadData() {
-  try {
-    const response = await fetch(dataUrl);
-    if (!response.ok) throw new Error('No se pudo cargar el catálogo');
-    const data = await response.json();
-    allDestinations = data.destinations;
-    filteredDestinations = [...allDestinations];
-    renderFilters(allDestinations);
-    renderDestinations(filteredDestinations);
-    renderPromotions(data.promotions);
-    renderPartners(data.partners);
-    startBackgroundSlider(filteredDestinations);
-  } catch (error) {
-    console.error(error);
-    destinationsGrid.innerHTML = '<p>Error al cargar destinos.</p>';
-  }
+  const response = await fetch(dataUrl);
+  catalog = await response.json();
+  setupFilters();
+  renderDestinations(catalog.destinations);
+  renderPromotions();
+  renderPartners();
+  initFadeIn();
 }
 
-function renderDestinations(destinations) {
-  destinationsGrid.innerHTML = '';
-  backgroundImages = destinations.map((dest) => dest.background || dest.image);
+function setupFilters() {
+  const regionSelect = document.getElementById('region-filter');
+  const countrySelect = document.getElementById('country-filter');
+  const citySelect = document.getElementById('city-filter');
 
-  if (!destinations.length) {
-    destinationsGrid.innerHTML = '<p>No hay resultados para los filtros seleccionados.</p>';
-    return;
+  const regions = ['Todas las regiones', ...new Set(catalog.destinations.map(d => d.region))];
+  regionSelect.innerHTML = regions.map(r => `<option value="${r}">${r}</option>`).join('');
+
+  function populateCountries(region) {
+    const filtered = catalog.destinations.filter(d => region === 'Todas las regiones' || d.region === region);
+    const countries = ['Todos los países', ...new Set(filtered.map(d => d.country))];
+    countrySelect.innerHTML = countries.map(c => `<option value="${c}">${c}</option>`).join('');
   }
 
-  destinations.forEach((dest, index) => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.innerHTML = `
-      <img src="${dest.image}" alt="${dest.name}">
-      <div class="eyebrow">
-        <span class="pill">${dest.region}</span>
-        <span>${dest.city}, ${dest.country}</span>
-      </div>
-      <h3>${dest.name}</h3>
-      <p>${dest.description}</p>
-      <div class="actions">
-        <button class="ghost-button" data-detail="${index}">Ver más detalles</button>
-        <button class="ghost-button" data-quote="${dest.name}">Cotizar</button>
-        <a href="${dest.checkout_url}" target="_blank" class="pay-button">Pagar con WeTravel</a>
-      </div>
-    `;
-    destinationsGrid.appendChild(card);
-  });
-}
+  function populateCities(region, country) {
+    const filtered = catalog.destinations.filter(d => {
+      const regionMatch = region === 'Todas las regiones' || d.region === region;
+      const countryMatch = country === 'Todos los países' || d.country === country;
+      return regionMatch && countryMatch;
+    });
+    const cities = ['Todas las ciudades', ...new Set(filtered.map(d => d.city))];
+    citySelect.innerHTML = cities.map(c => `<option value="${c}">${c}</option>`).join('');
+  }
 
-function renderFilters(destinations) {
-  const countries = Array.from(new Set(destinations.map((dest) => dest.country))).sort();
-  const cities = Array.from(new Set(destinations.map((dest) => dest.city))).sort();
+  populateCountries('Todas las regiones');
+  populateCities('Todas las regiones', 'Todos los países');
 
-  countryFilter.innerHTML = '<option value="all">Todos los países</option>' + countries.map((country) => `<option value="${country}">${country}</option>`).join('');
-  cityFilter.innerHTML = '<option value="all">Todas las ciudades</option>' + cities.map((city) => `<option value="${city}">${city}</option>`).join('');
+  function applyFilters() {
+    const region = regionSelect.value;
+    const country = countrySelect.value;
+    const city = citySelect.value;
+    const results = catalog.destinations.filter(d => {
+      const matchRegion = region === 'Todas las regiones' || d.region === region;
+      const matchCountry = country === 'Todos los países' || d.country === country;
+      const matchCity = city === 'Todas las ciudades' || d.city === city;
+      return matchRegion && matchCountry && matchCity;
+    });
+    renderDestinations(results);
+  }
 
-  countryFilter.addEventListener('change', () => {
-    const selectedCountry = countryFilter.value;
-    const scopedCities = Array.from(new Set(
-      allDestinations
-        .filter((dest) => selectedCountry === 'all' || dest.country === selectedCountry)
-        .map((dest) => dest.city)
-    )).sort();
-
-    cityFilter.innerHTML = '<option value="all">Todas las ciudades</option>' + scopedCities.map((city) => `<option value="${city}">${city}</option>`).join('');
+  regionSelect.addEventListener('change', () => {
+    populateCountries(regionSelect.value);
+    populateCities(regionSelect.value, 'Todos los países');
     applyFilters();
   });
 
-  cityFilter.addEventListener('change', applyFilters);
-}
-
-function applyFilters() {
-  const selectedCountry = countryFilter.value;
-  const selectedCity = cityFilter.value;
-
-  filteredDestinations = allDestinations.filter((dest) => {
-    const matchesCountry = selectedCountry === 'all' || dest.country === selectedCountry;
-    const matchesCity = selectedCity === 'all' || dest.city === selectedCity;
-    return matchesCountry && matchesCity;
+  countrySelect.addEventListener('change', () => {
+    populateCities(regionSelect.value, countrySelect.value);
+    applyFilters();
   });
 
-  renderDestinations(filteredDestinations);
-  startBackgroundSlider(filteredDestinations);
+  citySelect.addEventListener('change', applyFilters);
 }
 
-function renderPromotions(promotions) {
-  promotionsWrapper.innerHTML = '';
-  promotions.forEach((promo) => {
+function renderDestinations(list) {
+  const grid = document.getElementById('destinations-grid');
+  const bg = document.getElementById('destinations-background');
+  grid.innerHTML = '';
+  activeBackgrounds = list.map(d => d.image);
+  bg.style.backgroundImage = activeBackgrounds.length ? `url(${activeBackgrounds[0]})` : 'none';
+  let bgIndex = 0;
+  if (bgTimer) clearInterval(bgTimer);
+  if (activeBackgrounds.length > 1) {
+    bgTimer = setInterval(() => {
+      bgIndex = (bgIndex + 1) % activeBackgrounds.length;
+      bg.style.opacity = 0.3;
+      setTimeout(() => {
+        bg.style.backgroundImage = `url(${activeBackgrounds[bgIndex]})`;
+        bg.style.opacity = 0.6;
+      }, 250);
+    }, 4500);
+  }
+
+  list.forEach(dest => {
+    const card = document.createElement('article');
+    card.className = 'destination-card fade-in';
+    card.innerHTML = `
+      <img src="${dest.image}" alt="${dest.name}">
+      <div class="destination-body">
+        <div class="meta"><span class="badge city">${dest.city}</span><span>${dest.country} · ${dest.region}</span></div>
+        <h3>${dest.name}</h3>
+        <p class="muted">${dest.short_description}</p>
+        <div class="meta"><span class="price">Desde $${dest.price_from}</span></div>
+        <div class="actions">
+          <a class="action-link" href="pages/destination.html?id=${dest.id}">Ver más</a>
+          <button class="action-link" data-quote="${dest.name}">Cotizar</button>
+          <a class="action-link" href="${dest.checkout_url}" target="_blank">Pagar con WeTravel</a>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  observeFade();
+  attachQuoteButtons();
+}
+
+function renderPromotions() {
+  const wrapper = document.getElementById('promotions-wrapper');
+  wrapper.innerHTML = '';
+  catalog.promotions.forEach(promo => {
     const slide = document.createElement('div');
     slide.className = 'swiper-slide';
     slide.innerHTML = `
-      <article class="card">
+      <article class="promo-card">
         <img src="${promo.image}" alt="${promo.title}">
-        <h3>${promo.title}</h3>
-        <p>${promo.description}</p>
-        <div class="price-tag">$${promo.price} USD</div>
-        <div class="actions">
-          <button class="ghost-button" data-quote="${promo.title}">Cotizar</button>
-          <a href="${promo.checkout_url}" target="_blank" class="pay-button">Pagar con WeTravel</a>
+        <div class="promo-body">
+          <div class="promo-meta">
+            <span class="discount">${promo.discount_label}</span>
+            <span class="old-price">Antes $${promo.previous_price}</span>
+          </div>
+          <h3>${promo.title}</h3>
+          <p class="muted">${promo.description}</p>
+          <div class="meta"><span class="price">Ahora $${promo.price}</span></div>
+          <div class="actions">
+            <button class="action-link" data-quote="${promo.title}">Cotizar</button>
+            <a class="action-link" href="${promo.checkout_url}" target="_blank">Pagar con WeTravel</a>
+          </div>
         </div>
       </article>
     `;
-    promotionsWrapper.appendChild(slide);
+    wrapper.appendChild(slide);
   });
-
-  swiperInstance = new Swiper('.swiper', {
+  new Swiper('.promo-swiper', {
     slidesPerView: 1,
-    spaceBetween: 24,
-    loop: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
-    },
-    breakpoints: {
-      768: { slidesPerView: 2 }
-    }
+    spaceBetween: 16,
+    pagination: { el: '.swiper-pagination', clickable: true },
+    breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
   });
+  attachQuoteButtons();
+}
 
-  promotionsWrapper.addEventListener('click', (event) => {
-    const quoteBtn = event.target.closest('[data-quote]');
-    if (quoteBtn) {
-      openQuoteModal(quoteBtn.dataset.quote);
-    }
+function renderPartners() {
+  const track = document.getElementById('partner-track');
+  const dup = document.getElementById('partner-track-duplicate');
+  const logos = catalog.partners.map(src => `<img src="${src}" alt="Partner">`).join('');
+  track.innerHTML = logos;
+  dup.innerHTML = logos;
+}
+
+function attachQuoteButtons() {
+  document.querySelectorAll('[data-quote]').forEach(btn => {
+    btn.onclick = () => openQuoteModal(btn.dataset.quote);
   });
 }
 
-function renderPartners(partners) {
-  partnerTrack.innerHTML = '';
-  partnerTrackDuplicate.innerHTML = '';
-
-  partners.forEach((logo) => {
-    const img = document.createElement('img');
-    img.src = logo;
-    img.alt = 'Logo de socio';
-    partnerTrack.appendChild(img);
-  });
-
-  partnerTrackDuplicate.innerHTML = partnerTrack.innerHTML;
-}
-
-function startBackgroundSlider() {
-  if (backgroundInterval) clearInterval(backgroundInterval);
-  if (!backgroundImages.length) {
-    backgroundEl.style.backgroundImage = '';
-    backgroundEl.classList.remove('fade-in');
-    return;
-  }
-
-  backgroundIndex = 0;
-  backgroundEl.style.backgroundImage = `url(${backgroundImages[0]})`;
-  backgroundEl.classList.add('fade-in');
-
-  backgroundInterval = setInterval(() => {
-    backgroundIndex = (backgroundIndex + 1) % backgroundImages.length;
-    backgroundEl.classList.remove('fade-in');
-    setTimeout(() => {
-      backgroundEl.style.backgroundImage = `url(${backgroundImages[backgroundIndex]})`;
-      backgroundEl.classList.add('fade-in');
-    }, 300);
-  }, 5500);
-}
-
-function openDestinationModal(dest) {
-  destinationModalBody.innerHTML = `
-    <h3>${dest.name}</h3>
-    <p style="color: #94a3b8; font-weight:600;">${dest.city}, ${dest.country} · ${dest.region}</p>
-    <p>${dest.description}</p>
-    <div class="actions" style="margin-top:16px;">
-      <a class="pay-button" href="${dest.checkout_url}" target="_blank">Pagar con WeTravel</a>
-      <button class="ghost-button" id="view-itinerary">Ver itinerario PDF</button>
-    </div>
-  `;
-  destinationModal.classList.add('active');
-  destinationModal.setAttribute('aria-hidden', 'false');
-
-  const itineraryBtn = document.getElementById('view-itinerary');
-  itineraryBtn?.addEventListener('click', () => openPdfModal('assets/data/itinerary.pdf'));
-}
-
-function openQuoteModal(title) {
-  quoteModal.querySelector('h3').textContent = `Cotizar: ${title}`;
-  quoteModal.classList.add('active');
-  quoteModal.setAttribute('aria-hidden', 'false');
-}
-
-function openPdfModal(url) {
-  pdfFrame.src = url;
-  pdfModal.classList.add('active');
-  pdfModal.setAttribute('aria-hidden', 'false');
+function openQuoteModal(prefill = '') {
+  const modal = document.getElementById('quote-modal');
+  const field = document.getElementById('quote-destination');
+  field.value = prefill;
+  modal.setAttribute('aria-hidden', 'false');
 }
 
 function closeModal(modal) {
-  modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
-  if (modal === pdfModal) pdfFrame.src = '';
 }
 
-function initModals() {
-  document.body.addEventListener('click', (event) => {
-    const detailBtn = event.target.closest('[data-detail]');
-    const quoteBtn = event.target.closest('[data-quote]');
-    if (event.target.matches('[data-close]') || event.target.classList.contains('modal')) {
-      const modal = event.target.closest('.modal') || event.target;
-      closeModal(modal);
-    }
-
-    if (detailBtn && filteredDestinations.length) {
-      const dest = filteredDestinations[Number(detailBtn.dataset.detail)];
-      if (dest) openDestinationModal(dest);
-    }
-
-    if (quoteBtn) {
-      openQuoteModal(quoteBtn.dataset.quote);
-    }
+function setupModals() {
+  document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', () => closeModal(btn.closest('.modal'))));
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal(modal);
+    });
   });
 }
 
-function initContactForm() {
+function setupPDFButtons() {
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-pdf]');
+    if (!btn) return;
+    const url = btn.dataset.pdf;
+    if (!url) return;
+    const modal = document.getElementById('pdf-modal');
+    const frame = document.getElementById('pdf-frame');
+    frame.src = url;
+    modal.setAttribute('aria-hidden', 'false');
+  });
+}
+
+function handleForms() {
   const contactForm = document.getElementById('contact-form');
   const contactAlert = document.getElementById('contact-alert');
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const formData = new FormData(contactForm);
-    const hasEmpty = [...formData.values()].some((value) => !String(value).trim());
-    if (hasEmpty) {
-      contactAlert.textContent = 'Completa todos los campos.';
-      contactAlert.style.display = 'block';
-      contactAlert.style.color = '#fbbf24';
-      return;
-    }
-    contactAlert.textContent = 'Mensaje listo. Nuestro concierge te contactará.';
-    contactAlert.style.color = '#22c55e';
+  contactForm?.addEventListener('submit', e => {
+    e.preventDefault();
     contactAlert.style.display = 'block';
-    contactForm.reset();
+    setTimeout(() => contactAlert.style.display = 'none', 3200);
   });
-}
 
-function initQuoteForm() {
   const quoteForm = document.getElementById('quote-form');
   const quoteAlert = document.getElementById('quote-alert');
-  quoteForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const formData = new FormData(quoteForm);
-    const hasEmpty = [...formData.values()].some((value) => !String(value).trim());
-    if (hasEmpty) {
-      quoteAlert.textContent = 'Completa la información para cotizar.';
-      quoteAlert.style.color = '#fbbf24';
-      quoteAlert.style.display = 'block';
-      return;
-    }
-    quoteAlert.textContent = 'Cotización registrada. Responderemos con prioridad.';
-    quoteAlert.style.color = '#22c55e';
+  quoteForm?.addEventListener('submit', e => {
+    e.preventDefault();
     quoteAlert.style.display = 'block';
-    quoteForm.reset();
+    setTimeout(() => quoteAlert.style.display = 'none', 3200);
+    closeModal(document.getElementById('quote-modal'));
   });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+function initFadeIn() {
+  observeFade();
+  document.addEventListener('scroll', observeFade, { passive: true });
+}
+
+function observeFade() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupModals();
+  setupPDFButtons();
+  handleForms();
   loadData();
-  initModals();
-  initContactForm();
-  initQuoteForm();
 });

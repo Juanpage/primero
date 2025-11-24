@@ -3,77 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visiting World - Experiencias Cinematográficas</title>
+  <title>Visiting World | Viajes Cinematográficos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+  <div class="navbar">
+    <div class="logo">Visiting World</div>
+    <nav>
+      <a href="#destinos">Destinos</a>
+      <a href="#promociones">Promociones</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn ghost" href="#destinos">Explorar</a>
+  </div>
+
   <header class="hero">
-    <video autoplay muted loop playsinline poster="assets/img/destinations/galapagos.svg">
+    <video autoplay muted loop playsinline poster="assets/img/places/galapagos.svg">
       <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
       Tu navegador no soporta video HTML5.
     </video>
+    <div class="overlay"></div>
     <div class="hero-content">
-      <span class="badge">Travel. Film. Luxury.</span>
-      <h1>Explora destinos icónicos con una producción cinematográfica</h1>
-      <p>Diseñamos viajes premium con logística impecable, storytellers locales y reservas seguras vía WeTravel Checkout.</p>
-      <div>
-        <a class="btn" href="#destinations">Explorar Destinos</a>
+      <p class="badge">Cinematic Travel Studio</p>
+      <h1>Viajes de estilo cinematográfico en destinos icónicos</h1>
+      <p class="lead">Producción audiovisual, logística premium y pagos seguros con WeTravel.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#destinos">Explorar destinos</a>
+        <a class="btn ghost" href="#promociones">Ver promociones</a>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="destinations" class="destinations">
-      <div class="background-slider" id="destinations-background"></div>
-      <div class="section-title">
+    <section id="destinos" class="section destinos">
+      <div class="section-head fade-in">
         <div>
-          <span class="badge">Destinos curados</span>
-          <h2>Escenarios de película listos para tu próximo viaje</h2>
+          <p class="badge">Destinos curados</p>
+          <h2>Regiones → Países → Ciudades</h2>
+          <p>Filtra por región, país o ciudad y reserva con checkout seguro.</p>
         </div>
-        <p>Reservas confirmadas con <strong>WeTravel Checkout</strong> y soporte 24/7.</p>
+        <div class="filters">
+          <div class="filter">
+            <label for="region-filter">Región</label>
+            <select id="region-filter"></select>
+          </div>
+          <div class="filter">
+            <label for="country-filter">País</label>
+            <select id="country-filter"></select>
+          </div>
+          <div class="filter">
+            <label for="city-filter">Ciudad</label>
+            <select id="city-filter"></select>
+          </div>
+        </div>
       </div>
-      <div class="filters">
-        <div class="filter-control">
-          <label for="country-filter">Filtrar por país</label>
-          <select id="country-filter">
-            <option value="all">Todos los países</option>
-          </select>
-        </div>
-        <div class="filter-control">
-          <label for="city-filter">Filtrar por ciudad</label>
-          <select id="city-filter">
-            <option value="all">Todas las ciudades</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid" id="destinations-grid"></div>
+      <div class="background-slider" id="destinations-background"></div>
+      <div class="destinations-grid" id="destinations-grid"></div>
     </section>
 
-    <section class="promotions" id="promotions">
-      <div class="section-title">
+    <section id="promociones" class="section promociones">
+      <div class="section-head fade-in">
         <div>
-          <span class="badge">Promociones</span>
-          <h2>Paquetes en lanzamiento con pago inmediato</h2>
+          <p class="badge">Promociones</p>
+          <h2>Ofertas cinematográficas</h2>
+          <p>Mínimo 4 promos con pago WeTravel y cotización inmediata.</p>
         </div>
-        <p>Tarifas dinámicas, itinerarios descargables y checkout seguro.</p>
       </div>
-      <div class="swiper">
+      <div class="swiper promo-swiper">
         <div class="swiper-wrapper" id="promotions-wrapper"></div>
         <div class="swiper-pagination"></div>
       </div>
     </section>
 
-    <section class="partners">
-      <div class="section-title">
+    <section class="section partners">
+      <div class="section-head fade-in">
         <div>
-          <span class="badge">Socios estratégicos</span>
-          <h2>Marcas que respaldan cada producción</h2>
+          <p class="badge">Socios estratégicos</p>
+          <h2>Marquesina premium</h2>
         </div>
-        <p>Operadores, aerolíneas y hoteles premium.</p>
       </div>
       <div class="partner-marquee">
         <div class="partner-track" id="partner-track"></div>
@@ -81,37 +92,32 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
-      <div>
-        <span class="badge">Contacto</span>
-        <h2>Hablemos de tu próximo rodaje viajero</h2>
-        <p>Cuéntanos tus fechas, aforo y estilo. Nuestro equipo responderá en minutos.</p>
+    <section id="contacto" class="section contacto">
+      <div class="contact-card fade-in">
+        <div>
+          <p class="badge">Contacto</p>
+          <h2>Hablemos de tu próximo viaje</h2>
+          <p>Concierge 24/7, itinerarios personalizados y pagos protegidos.</p>
+        </div>
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Nombre</label>
+            <input type="text" id="contact-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Mensaje</label>
+            <textarea id="contact-message" name="message" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn">Enviar</button>
+          <div class="alert" id="contact-alert">Tu mensaje fue enviado, te contactaremos pronto.</div>
+        </form>
       </div>
-      <form id="contact-form">
-        <div class="form-group">
-          <label for="name">Nombre completo</label>
-          <input type="text" id="name" name="name" placeholder="Nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="email@ejemplo.com" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Mensaje</label>
-          <textarea id="message" name="message" placeholder="Cuéntanos el viaje ideal" required></textarea>
-        </div>
-        <button type="submit" class="btn">Enviar mensaje</button>
-        <div class="alert" id="contact-alert">Mensaje listo. Nuestro concierge te contactará.</div>
-      </form>
     </section>
   </main>
-
-  <div class="modal" id="destination-modal" aria-hidden="true">
-    <div class="modal-content">
-      <button class="close" data-close>&times;</button>
-      <div id="destination-modal-body"></div>
-    </div>
-  </div>
 
   <div class="modal" id="quote-modal" aria-hidden="true">
     <div class="modal-content">
@@ -120,35 +126,47 @@
       <form id="quote-form">
         <div class="form-group">
           <label for="quote-name">Nombre</label>
-          <input type="text" id="quote-name" name="quote-name" required>
+          <input type="text" id="quote-name" name="name" required>
         </div>
         <div class="form-group">
           <label for="quote-email">Email</label>
-          <input type="email" id="quote-email" name="quote-email" required>
+          <input type="email" id="quote-email" name="email" required>
         </div>
         <div class="form-group">
-          <label for="quote-date">Fecha</label>
-          <input type="date" id="quote-date" name="quote-date" required>
+          <label for="quote-destination">Destino</label>
+          <input type="text" id="quote-destination" name="destination" required>
         </div>
-        <div class="form-group">
-          <label for="quote-people">Número de personas</label>
-          <input type="number" id="quote-people" name="quote-people" min="1" value="2" required>
+        <div class="form-group two-cols">
+          <div>
+            <label for="quote-date">Fecha</label>
+            <input type="date" id="quote-date" name="date" required>
+          </div>
+          <div>
+            <label for="quote-people">Personas</label>
+            <input type="number" id="quote-people" name="people" min="1" value="2" required>
+          </div>
         </div>
-        <button type="submit" class="btn">Enviar cotización</button>
-        <div class="alert" id="quote-alert">Cotización registrada. Responderemos con prioridad.</div>
+        <button type="submit" class="btn">Enviar solicitud</button>
+        <div class="alert" id="quote-alert">Solicitud enviada correctamente.</div>
       </form>
     </div>
   </div>
 
-  <div class="modal pdf-viewer" id="pdf-modal" aria-hidden="true">
+  <div class="modal pdf-modal" id="pdf-modal" aria-hidden="true">
     <div class="modal-content">
       <button class="close" data-close>&times;</button>
-      <h3>Ver itinerario</h3>
+      <h3>Itinerario PDF</h3>
       <iframe id="pdf-frame" src="" title="Itinerario"></iframe>
     </div>
   </div>
 
+  <a class="whatsapp" href="https://wa.me/593999999999?text=Hola%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" aria-label="WhatsApp">
+    <span>WhatsApp</span>
+  </a>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/chatbot.js"></script>
+  <script src="assets/js/email.js"></script>
 </body>
 </html>
