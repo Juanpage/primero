@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del destino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">Visiting World</div>
+    <nav>
+      <a href="../index.html#destinos">Destinos</a>
+      <a href="../index.html#promociones">Promociones</a>
+      <a href="../index.html#contacto">Contacto</a>
+    </nav>
+    <a class="btn ghost" href="../index.html">Inicio</a>
+  </div>
+
+  <main class="section" id="destination-detail">
+    <div class="background-slider" id="detail-bg"></div>
+    <div class="detail-card">
+      <img id="detail-image" alt="Destino" />
+      <div class="detail-body">
+        <p class="badge" id="detail-location"></p>
+        <h1 id="detail-title"></h1>
+        <p class="muted" id="detail-description"></p>
+        <p class="meta"><strong id="detail-price"></strong></p>
+        <div class="actions">
+          <a class="action-link" id="detail-pay" target="_blank">Pagar con WeTravel</a>
+          <button class="action-link" id="detail-quote">Cotizar</button>
+          <button class="action-link" id="detail-pdf" data-pdf>Ver PDF</button>
+          <a class="action-link" href="../index.html">Regresar</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal pdf-modal" id="pdf-modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <h3>Itinerario PDF</h3>
+      <iframe id="pdf-frame" src="" title="Itinerario"></iframe>
+    </div>
+  </div>
+
+  <script src="../assets/js/detail.js"></script>
+  <script src="../assets/js/chatbot.js"></script>
+  <script src="../assets/js/email.js"></script>
+</body>
+</html>

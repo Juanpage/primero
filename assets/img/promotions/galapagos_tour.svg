@@ -1,0 +1,11 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="p1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="28" fill="url(#p1)"/>
+  <text x="50%" y="50%" font-size="46" fill="#fff" text-anchor="middle" font-family="'Segoe UI',sans-serif" dy="12">Tour Galápagos</text>
+  <text x="50%" y="64%" font-size="22" fill="#e0f2fe" text-anchor="middle" font-family="'Segoe UI',sans-serif">4D/3N</text>
+</svg>
