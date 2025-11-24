@@ -5,21 +5,60 @@
       "description": "Navega entre islas con guías expertos, snorkel con tortugas y noches bajo las estrellas.",
       "image": "assets/img/destinations/galapagos.svg",
       "checkout_url": "https://www.wetravel.com/checkout/XYZ123",
-      "background": "assets/img/destinations/galapagos.svg"
+      "background": "assets/img/destinations/galapagos.svg",
+      "region": "Sudamérica",
+      "country": "Ecuador",
+      "city": "Puerto Ayora"
     },
     {
       "name": "Patagonia",
       "description": "Explora glaciares y lagos turquesa en expediciones con logística premium.",
       "image": "assets/img/destinations/patagonia.svg",
       "checkout_url": "https://www.wetravel.com/checkout/PATA456",
-      "background": "assets/img/destinations/patagonia.svg"
+      "background": "assets/img/destinations/patagonia.svg",
+      "region": "Sudamérica",
+      "country": "Argentina",
+      "city": "El Calafate"
     },
     {
       "name": "Machu Picchu",
       "description": "Recorre el santuario con curadores culturales y experiencias inmersivas.",
       "image": "assets/img/destinations/machu_picchu.svg",
       "checkout_url": "https://www.wetravel.com/checkout/MACHU789",
-      "background": "assets/img/destinations/machu_picchu.svg"
+      "background": "assets/img/destinations/machu_picchu.svg",
+      "region": "Sudamérica",
+      "country": "Perú",
+      "city": "Cusco"
+    },
+    {
+      "name": "Fiordos Noruegos",
+      "description": "Navega en barcos boutique entre montañas nevadas con cenas nórdicas y auroras boreales.",
+      "image": "assets/img/destinations/fiordos_noruegos.svg",
+      "checkout_url": "https://www.wetravel.com/checkout/NOR567",
+      "background": "assets/img/destinations/fiordos_noruegos.svg",
+      "region": "Europa",
+      "country": "Noruega",
+      "city": "Bergen"
+    },
+    {
+      "name": "Kyoto Clásica",
+      "description": "Templos milenarios, ceremonias de té privadas y paseos nocturnos en Gion.",
+      "image": "assets/img/destinations/kyoto.svg",
+      "checkout_url": "https://www.wetravel.com/checkout/KYO321",
+      "background": "assets/img/destinations/kyoto.svg",
+      "region": "Asia",
+      "country": "Japón",
+      "city": "Kyoto"
+    },
+    {
+      "name": "Safari Masái Mara",
+      "description": "Campamentos de lujo, guías expertos en fauna y vuelos en globo al amanecer.",
+      "image": "assets/img/destinations/masai_mara.svg",
+      "checkout_url": "https://www.wetravel.com/checkout/MAS999",
+      "background": "assets/img/destinations/masai_mara.svg",
+      "region": "África",
+      "country": "Kenia",
+      "city": "Narok"
     }
   ],
   "promotions": [
@@ -36,6 +75,20 @@
       "description": "Campamento de lujo con trekking guiado.",
       "image": "assets/img/promotions/patagonia_express.svg",
       "checkout_url": "https://www.wetravel.com/checkout/DEF654"
+    },
+    {
+      "title": "Fiordos Signature 6D/5N",
+      "price": "1,980",
+      "description": "Crucero boutique con cenas Michelin y avistamiento de auroras.",
+      "image": "assets/img/destinations/fiordos_noruegos.svg",
+      "checkout_url": "https://www.wetravel.com/checkout/FIO111"
+    },
+    {
+      "title": "Kyoto Privado 3D/2N",
+      "price": "1,150",
+      "description": "Ryokan con onsen, guía cultural y cenas kaiseki.",
+      "image": "assets/img/destinations/kyoto.svg",
+      "checkout_url": "https://www.wetravel.com/checkout/KYO654"
     }
   ],
   "partners": [

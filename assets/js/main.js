@@ -4,6 +4,8 @@ const promotionsWrapper = document.getElementById('promotions-wrapper');
 const backgroundEl = document.getElementById('destinations-background');
 const partnerTrack = document.getElementById('partner-track');
 const partnerTrackDuplicate = document.getElementById('partner-track-duplicate');
+const countryFilter = document.getElementById('country-filter');
+const cityFilter = document.getElementById('city-filter');
 
 const destinationModal = document.getElementById('destination-modal');
 const destinationModalBody = document.getElementById('destination-modal-body');
@@ -14,16 +16,22 @@ const pdfFrame = document.getElementById('pdf-frame');
 let swiperInstance;
 let backgroundIndex = 0;
 let backgroundImages = [];
+let backgroundInterval;
+let allDestinations = [];
+let filteredDestinations = [];
 
 async function loadData() {
   try {
     const response = await fetch(dataUrl);
     if (!response.ok) throw new Error('No se pudo cargar el catálogo');
     const data = await response.json();
-    renderDestinations(data.destinations);
+    allDestinations = data.destinations;
+    filteredDestinations = [...allDestinations];
+    renderFilters(allDestinations);
+    renderDestinations(filteredDestinations);
     renderPromotions(data.promotions);
     renderPartners(data.partners);
-    startBackgroundSlider();
+    startBackgroundSlider(filteredDestinations);
   } catch (error) {
     console.error(error);
     destinationsGrid.innerHTML = '<p>Error al cargar destinos.</p>';
@@ -32,30 +40,68 @@ async function loadData() {
 
 function renderDestinations(destinations) {
   destinationsGrid.innerHTML = '';
-  backgroundImages = destinations.map(dest => dest.background || dest.image);
+  backgroundImages = destinations.map((dest) => dest.background || dest.image);
+
+  if (!destinations.length) {
+    destinationsGrid.innerHTML = '<p>No hay resultados para los filtros seleccionados.</p>';
+    return;
+  }
 
   destinations.forEach((dest, index) => {
     const card = document.createElement('article');
     card.className = 'card';
     card.innerHTML = `
       <img src="${dest.image}" alt="${dest.name}">
+      <div class="eyebrow">
+        <span class="pill">${dest.region}</span>
+        <span>${dest.city}, ${dest.country}</span>
+      </div>
       <h3>${dest.name}</h3>
       <p>${dest.description}</p>
       <div class="actions">
-        <button class="ghost-button" data-detail="${index}">Ver más</button>
-        <a href="${dest.checkout_url}" target="_blank" class="pay-button">Reservar ahora</a>
+        <button class="ghost-button" data-detail="${index}">Ver más detalles</button>
+        <button class="ghost-button" data-quote="${dest.name}">Cotizar</button>
+        <a href="${dest.checkout_url}" target="_blank" class="pay-button">Pagar con WeTravel</a>
       </div>
     `;
     destinationsGrid.appendChild(card);
   });
+}
 
-  destinationsGrid.addEventListener('click', (event) => {
-    const detailBtn = event.target.closest('[data-detail]');
-    if (detailBtn) {
-      const dest = destinations[Number(detailBtn.dataset.detail)];
-      openDestinationModal(dest);
-    }
+function renderFilters(destinations) {
+  const countries = Array.from(new Set(destinations.map((dest) => dest.country))).sort();
+  const cities = Array.from(new Set(destinations.map((dest) => dest.city))).sort();
+
+  countryFilter.innerHTML = '<option value="all">Todos los países</option>' + countries.map((country) => `<option value="${country}">${country}</option>`).join('');
+  cityFilter.innerHTML = '<option value="all">Todas las ciudades</option>' + cities.map((city) => `<option value="${city}">${city}</option>`).join('');
+
+  countryFilter.addEventListener('change', () => {
+    const selectedCountry = countryFilter.value;
+    const scopedCities = Array.from(new Set(
+      allDestinations
+        .filter((dest) => selectedCountry === 'all' || dest.country === selectedCountry)
+        .map((dest) => dest.city)
+    )).sort();
+
+    cityFilter.innerHTML = '<option value="all">Todas las ciudades</option>' + scopedCities.map((city) => `<option value="${city}">${city}</option>`).join('');
+    applyFilters();
   });
+
+  cityFilter.addEventListener('change', applyFilters);
+}
+
+function applyFilters() {
+  const selectedCountry = countryFilter.value;
+  const selectedCity = cityFilter.value;
+
+  filteredDestinations = allDestinations.filter((dest) => {
+    const matchesCountry = selectedCountry === 'all' || dest.country === selectedCountry;
+    const matchesCity = selectedCity === 'all' || dest.city === selectedCity;
+    return matchesCountry && matchesCity;
+  });
+
+  renderDestinations(filteredDestinations);
+  startBackgroundSlider(filteredDestinations);
 }
 
 function renderPromotions(promotions) {
@@ -114,11 +160,18 @@ function renderPartners(partners) {
 }
 
 function startBackgroundSlider() {
-  if (!backgroundImages.length) return;
+  if (backgroundInterval) clearInterval(backgroundInterval);
+  if (!backgroundImages.length) {
+    backgroundEl.style.backgroundImage = '';
+    backgroundEl.classList.remove('fade-in');
+    return;
+  }
+
+  backgroundIndex = 0;
   backgroundEl.style.backgroundImage = `url(${backgroundImages[0]})`;
   backgroundEl.classList.add('fade-in');
 
-  setInterval(() => {
+  backgroundInterval = setInterval(() => {
     backgroundIndex = (backgroundIndex + 1) % backgroundImages.length;
     backgroundEl.classList.remove('fade-in');
     setTimeout(() => {
@@ -131,9 +184,10 @@ function startBackgroundSlider() {
 function openDestinationModal(dest) {
   destinationModalBody.innerHTML = `
     <h3>${dest.name}</h3>
+    <p style="color: #94a3b8; font-weight:600;">${dest.city}, ${dest.country} · ${dest.region}</p>
     <p>${dest.description}</p>
     <div class="actions" style="margin-top:16px;">
-      <a class="pay-button" href="${dest.checkout_url}" target="_blank">Reservar ahora</a>
+      <a class="pay-button" href="${dest.checkout_url}" target="_blank">Pagar con WeTravel</a>
       <button class="ghost-button" id="view-itinerary">Ver itinerario PDF</button>
     </div>
   `;
@@ -164,9 +218,20 @@ function closeModal(modal) {
 
 function initModals() {
   document.body.addEventListener('click', (event) => {
+    const detailBtn = event.target.closest('[data-detail]');
+    const quoteBtn = event.target.closest('[data-quote]');
     if (event.target.matches('[data-close]') || event.target.classList.contains('modal')) {
       const modal = event.target.closest('.modal') || event.target;
       closeModal(modal);
+    }
+
+    if (detailBtn && filteredDestinations.length) {
+      const dest = filteredDestinations[Number(detailBtn.dataset.detail)];
+      if (dest) openDestinationModal(dest);
+    }
+
+    if (quoteBtn) {
+      openQuoteModal(quoteBtn.dataset.quote);
     }
   });
 }
