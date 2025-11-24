@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visiting World | Viajes curados con pagos seguros</title>
+  <meta name="description" content="Viajes premium con WeTravel, sostenibilidad, accesibilidad y servicio humano 24/7." />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#1b4965" />
+</head>
+<body>
+  <a class="skip-link" href="#destinations">Saltar al contenido</a>
+  <div data-include="/components/header.html"></div>
+  <template id="card-destination-template">
+    <article class="card destination-card" itemscope itemtype="https://schema.org/Offer">
+      <div class="card__media">
+        <img class="card__image" loading="lazy" alt="" src="" itemprop="image" />
+        <span class="card__badge theme-badge" itemprop="areaServed"></span>
+      </div>
+      <div class="card__body">
+        <div class="card__rating" aria-label="Valoración">
+          <span aria-hidden="true">★★★★★</span>
+          <span class="sr-only">4.8 de 5</span>
+        </div>
+        <h3 class="card__title" itemprop="name"></h3>
+        <p class="card__meta"></p>
+        <p class="card__description" itemprop="description"></p>
+        <p class="card__price">Desde <span itemprop="price"></span> <meta itemprop="priceCurrency" content="USD" /></p>
+        <div class="card__actions">
+          <a class="btn btn--primary btn--sm card__cta" href="#" itemprop="url">Ver más</a>
+          <button class="btn btn--ghost btn--sm js-quote" type="button">Cotizar</button>
+          <a class="btn btn--primary btn--sm js-wetravel" href="#" target="_blank" rel="noopener" aria-hidden="true" style="display:none;">Pagar con WeTravel</a>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <main>
+    <section class="hero" aria-label="Destinos destacados">
+      <div class="hero__media">
+        <video class="hero__video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80">
+          <source src="/assets/video/hero.mp4" type="video/mp4" />
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80" alt="Olas en la playa" />
+        </video>
+        <div class="hero__overlay" aria-hidden="true"></div>
+      </div>
+      <div class="hero__content" data-animate>
+        <span class="hero__kicker">Experiencias cinematográficas</span>
+        <h1 class="hero__title">Visiting World: viajes curados, seguros y sostenibles</h1>
+        <p class="hero__description">Diseñamos itinerarios premium con accesibilidad, integración WhatsApp, pagos WeTravel y soporte humano global.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#destinations">Explorar destinos</a>
+          <a class="btn btn--ghost" href="#promotions">Ver promociones</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pillars" aria-labelledby="pillars-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="pillars-title">Nuestros Pilares</h2>
+          <p class="section__subtitle">Innovación, seguridad y servicio de calidad con experiencias que inspiran.</p>
+        </div>
+        <div class="pillars">
+          <article class="pillar pillar--innovation" data-animate>
+            <div class="pillar__icon" aria-hidden="true">🚀</div>
+            <h3 class="pillar__title">Innovación</h3>
+            <p class="pillar__text">Tecnología propia, IA y automatización para personalizar cada itinerario.</p>
+          </article>
+          <article class="pillar pillar--security" data-animate>
+            <div class="pillar__icon" aria-hidden="true">🛡️</div>
+            <h3 class="pillar__title">Seguridad</h3>
+            <p class="pillar__text">Coberturas médicas, protocolos y monitoreo en tiempo real 24/7.</p>
+          </article>
+          <article class="pillar pillar--quality" data-animate>
+            <div class="pillar__icon" aria-hidden="true">✨</div>
+            <h3 class="pillar__title">Servicio de calidad</h3>
+            <p class="pillar__text">Concierge multilingüe, experiencias inclusivas y atención humana.</p>
+          </article>
+          <article class="pillar pillar--experience" data-animate>
+            <div class="pillar__icon" aria-hidden="true">🌍</div>
+            <h3 class="pillar__title">Experiencias</h3>
+            <p class="pillar__text">Rutas auténticas con impacto positivo y guías locales certificados.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="destinations" aria-labelledby="destinations-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <h2 class="section__title" id="destinations-title">Destinos curados</h2>
+            <p class="section__subtitle">Filtra por región, país o ciudad y encuentra experiencias listas para pagar con WeTravel.</p>
+          </div>
+          <div class="filters" role="group" aria-label="Filtros de destinos">
+            <label class="sr-only" for="filter-region">Región</label>
+            <select id="filter-region" class="select" aria-label="Filtrar por región"></select>
+            <label class="sr-only" for="filter-country">País</label>
+            <select id="filter-country" class="select" aria-label="Filtrar por país"></select>
+            <label class="sr-only" for="filter-city">Ciudad</label>
+            <select id="filter-city" class="select" aria-label="Filtrar por ciudad"></select>
+          </div>
+        </div>
+        <div class="destinations" id="destinations-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section theme-gradient" id="promotions" aria-labelledby="promotions-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <h2 class="section__title" id="promotions-title">Promociones limitadas</h2>
+            <p class="section__subtitle">Reserva con pagos seguros WeTravel. Botones ocultos hasta activar integración.</p>
+          </div>
+        </div>
+        <div class="promo-slider" id="promo-slider"></div>
+      </div>
+    </section>
+
+    <section class="section" id="partners" aria-labelledby="partners-title">
+      <div class="container partners">
+        <div class="section__header">
+          <h2 class="section__title" id="partners-title">Socios estratégicos</h2>
+          <p class="section__subtitle">Alianzas globales con aerolíneas, hoteles y procesadores de pago.</p>
+        </div>
+        <div class="partners__viewport" id="partners-viewport" aria-live="polite">
+          <div class="partners__track" id="partners-track" aria-label="Logos de socios"></div>
+        </div>
+        <div class="partners__controls" aria-label="Controles del slider de socios">
+          <div class="partners__arrows">
+            <button class="partners__arrow" id="partners-prev" aria-label="Anterior socio">◀</button>
+            <button class="partners__arrow" id="partners-next" aria-label="Siguiente socio">▶</button>
+          </div>
+          <div class="partners__dots" id="partners-dots" role="tablist" aria-label="Paginación de socios"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="blog" aria-labelledby="blog-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="blog-title">Blog & novedades</h2>
+          <p class="section__subtitle">Consejos de viaje, seguridad, gastronomía y experiencias sostenibles.</p>
+        </div>
+        <div class="blog-grid" id="blog-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="contact-title">Contacto inmediato</h2>
+          <p class="section__subtitle">Formulario seguro con confirmación automática y soporte humano.</p>
+        </div>
+        <form class="form" id="contact-form" novalidate>
+          <div class="form__group">
+            <label class="form__label" for="contact-name">Nombre*</label>
+            <input class="form__input" id="contact-name" name="nombre" required aria-required="true" />
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="contact-email">Email*</label>
+            <input class="form__input" id="contact-email" name="email" type="email" required aria-required="true" />
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="contact-destination">Destino*</label>
+            <input class="form__input" id="contact-destination" name="destino" required aria-required="true" />
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="contact-message">Mensaje</label>
+            <textarea class="form__textarea" id="contact-message" name="mensaje"></textarea>
+          </div>
+          <button class="btn btn--primary" type="submit">Enviar</button>
+          <p id="contact-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <div class="whatsapp" aria-label="Contacto por WhatsApp">
+    <button id="whatsapp-btn" class="whatsapp__btn" aria-label="Abrir chat de WhatsApp">💬</button>
+  </div>
+
+  <div class="modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-title">
+    <div class="modal__dialog">
+      <button class="modal__close" aria-label="Cerrar" data-modal-close>×</button>
+      <h3 id="quote-title">Solicitar cotización</h3>
+      <form class="form" id="quote-form" novalidate>
+        <div class="form__group">
+          <label class="form__label" for="quote-name">Nombre*</label>
+          <input class="form__input" id="quote-name" name="nombre" required aria-required="true" />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="quote-email">Email*</label>
+          <input class="form__input" id="quote-email" name="email" type="email" required aria-required="true" />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="quote-destination">Destino*</label>
+          <input class="form__input" id="quote-destination" name="destino" required aria-required="true" />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="quote-date">Fecha</label>
+          <input class="form__input" id="quote-date" name="fecha" type="date" />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="quote-people">Personas</label>
+          <input class="form__input" id="quote-people" name="personas" type="number" min="1" value="2" />
+        </div>
+        <button class="btn btn--primary" type="submit">Enviar</button>
+        <p id="quote-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/js/seo.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/email.js" defer></script>
+  <script src="/assets/js/chatbot.js" defer></script>
+  <script src="/assets/js/whatsapp.js" defer></script>
+  <script src="/assets/js/payment.js" type="module" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-include]').forEach(async (el) => {
+        const file = el.getAttribute('data-include');
+        const res = await fetch(file);
+        el.outerHTML = await res.text();
+      });
+    });
+  </script>
+</body>
+</html>

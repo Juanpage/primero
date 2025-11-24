@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destino | Visiting World</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+</head>
+<body>
+  <div data-include="/components/header.html"></div>
+  <main class="section">
+    <div class="container" id="destination-detail" aria-live="polite">
+      <p>Cargando destino...</p>
+    </div>
+    <div class="container" style="margin-top:1.5rem;">
+      <a class="btn btn--ghost" href="/pages/destinations.html">Regresar</a>
+    </div>
+  </main>
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/assets/js/seo.js" defer></script>
+  <script src="/assets/js/email.js" defer></script>
+  <script>
+    async function loadDestination() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const container = document.getElementById('destination-detail');
+      const res = await fetch('/assets/data/travel-data.json');
+      const data = await res.json();
+      const destination = data.regions.flatMap(r => r.countries.flatMap(c => c.destinations)).find(d => d.id === id);
+      if (!destination) {
+        container.innerHTML = '<p>No se encontró el destino.</p>';
+        return;
+      }
+      container.innerHTML = `
+        <article class="card">
+          <div class="card__media">
+            <img class="card__image" src="${destination.image}" alt="${destination.title}" loading="lazy" />
+          </div>
+          <div class="card__body">
+            <p class="card__badge theme-badge">${destination.city} · ${destination.country} · ${destination.region}</p>
+            <h1 class="card__title">${destination.longTitle}</h1>
+            <p class="card__description">${destination.longDescription}</p>
+            <p class="card__price">Desde $${destination.priceFrom}</p>
+            <div class="card__actions">
+              <a class="btn btn--primary js-wetravel" href="${destination.checkout_url}" target="_blank" rel="noopener" aria-hidden="true" style="display:none;">Pagar con WeTravel</a>
+              ${destination.pdf ? `<a class="btn btn--ghost" href="/${destination.pdf}" target="_blank" rel="noopener">Itinerario PDF</a>` : ''}
+            </div>
+          </div>
+        </article>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-include]').forEach(async (el) => {
+        const file = el.getAttribute('data-include');
+        const res = await fetch(file);
+        el.outerHTML = await res.text();
+      });
+      loadDestination();
+    });
+  </script>
+</body>
+</html>

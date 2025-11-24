@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservas | Visiting World</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+</head>
+<body>
+  <div data-include="/components/header.html"></div>
+  <template id="card-destination-template">
+    <article class="card destination-card" itemscope itemtype="https://schema.org/Offer">
+      <div class="card__media">
+        <img class="card__image" loading="lazy" alt="" src="" itemprop="image" />
+        <span class="card__badge theme-badge" itemprop="areaServed"></span>
+      </div>
+      <div class="card__body">
+        <div class="card__rating" aria-label="Valoración">
+          <span aria-hidden="true">★★★★★</span>
+          <span class="sr-only">4.8 de 5</span>
+        </div>
+        <h3 class="card__title" itemprop="name"></h3>
+        <p class="card__meta"></p>
+        <p class="card__description" itemprop="description"></p>
+        <p class="card__price">Desde <span itemprop="price"></span> <meta itemprop="priceCurrency" content="USD" /></p>
+        <div class="card__actions">
+          <a class="btn btn--primary btn--sm card__cta" href="#" itemprop="url">Ver más</a>
+          <button class="btn btn--ghost btn--sm js-quote" type="button">Cotizar</button>
+          <a class="btn btn--primary btn--sm js-wetravel" href="#" target="_blank" rel="noopener" aria-hidden="true" style="display:none;">Pagar con WeTravel</a>
+        </div>
+      </div>
+    </article>
+  </template>
+  <main class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1 class="section__title">Reservas seguras</h1>
+        <p class="section__subtitle">Pagos con WeTravel, confirmación inmediata y soporte 24/7.</p>
+      </div>
+      <p>Selecciona un destino para iniciar tu proceso de reserva o cotización personalizada. Los pagos con WeTravel permanecen ocultos hasta habilitar la pasarela definitiva.</p>
+      <div class="destinations" id="destinations-grid" aria-live="polite"></div>
+    </div>
+  </main>
+  <div data-include="/components/footer.html"></div>
+  <script src="/assets/js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-include]').forEach(async (el) => {
+        const res = await fetch(el.getAttribute('data-include'));
+        el.outerHTML = await res.text();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+@media (max-width: 1440px) {
+  .hero { min-height: 72vh; }
+}
+
+@media (max-width: 1024px) {
+  .header__inner { flex-wrap: wrap; }
+  .hero__title { font-size: clamp(2.2rem, 4vw, 3rem); }
+}
+
+@media (max-width: 768px) {
+  .hero__actions { flex-direction: column; }
+  .navbar__list { flex-wrap: wrap; }
+  .partners__track { animation-duration: 36s; }
+  .modal__dialog { max-width: 96%; }
+}
+
+@media (max-width: 480px) {
+  .header__inner { padding: 0.65rem 0.9rem; }
+  .hero__content { margin-bottom: 2rem; }
+  .card__actions { flex-direction: column; }
+  .whatsapp__btn { width: 52px; height: 52px; }
+}

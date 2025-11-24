@@ -1,0 +1,5 @@
+[
+  {"id": "blog-sostenibilidad", "title": "Cómo viajamos de forma responsable", "excerpt": "Nuestras políticas de sostenibilidad, trazabilidad y neutralidad de carbono para cuidar los destinos.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "author": "Equipo Visiting World", "date": "2024-11-20"},
+  {"id": "blog-seguridad", "title": "Seguridad y seguros de viaje incluidos", "excerpt": "Coberturas médicas, protocolos de evacuación y acompañamiento 24/7 en cada reserva.", "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "author": "Unidad de Operaciones", "date": "2024-12-02"},
+  {"id": "blog-gastronomia", "title": "Rutas gastronómicas imperdibles", "excerpt": "Experiencias culinarias con chefs locales, mercados y talleres de cocina inmersiva.", "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80", "author": "Cocina Mundo", "date": "2024-12-10"}
+]

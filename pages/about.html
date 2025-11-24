@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acerca de | Visiting World</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+</head>
+<body>
+  <div data-include="/components/header.html"></div>
+  <main class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1 class="section__title">Acerca de Visiting World</h1>
+        <p class="section__subtitle">Somos un equipo global de especialistas en viajes sostenibles, accesibles y de alto impacto.</p>
+      </div>
+      <p>Visiting World nace con la misión de crear experiencias cinematográficas que respeten el entorno y garanticen seguridad, accesibilidad y hospitalidad. Trabajamos con comunidades locales, certificaciones de calidad y procesos auditados.</p>
+      <ul>
+        <li>WCAG 2.1 AA en toda la experiencia digital.</li>
+        <li>Pagos y reservas con WeTravel, con botón oculto hasta activación.</li>
+        <li>Soporte humano 24/7 vía WhatsApp y correo seguro.</li>
+      </ul>
+    </div>
+  </main>
+  <div data-include="/components/footer.html"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-include]').forEach(async (el) => {
+        const res = await fetch(el.getAttribute('data-include'));
+        el.outerHTML = await res.text();
+      });
+    });
+  </script>
+</body>
+</html>

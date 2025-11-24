@@ -1,0 +1,158 @@
+{
+  "regions": [
+    {
+      "name": "Sudamérica",
+      "countries": [
+        {
+          "name": "Ecuador",
+          "destinations": [
+            {"id": "ec-q-quito","city": "Quito","title": "Quito Patrimonial y Andes", "longTitle":"Quito Patrimonial y Andes", "shortDescription": "Centro histórico, gastronomía andina y teleférico.", "longDescription": "Explora la ciudad patrimonial más alta del mundo, pasea por la Mitad del Mundo y deléitate con sabores ancestrales en una ruta gastronómica guiada.", "image": "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=900&q=80", "priceFrom": 320, "region": "Sudamérica", "country": "Ecuador", "checkout_url": "https://www.wetravel.com/ecuador-quito", "pdf": "assets/pdf/quito.pdf"},
+            {"id": "ec-g-galapagos","city": "Galápagos","title": "Aventura Marina Galápagos", "longTitle":"Aventura Marina Galápagos", "shortDescription": "Islas encantadas con guías naturalistas.", "longDescription": "Vive el archipiélago en un itinerario sostenible que incluye snorkel con tortugas, caminatas volcánicas y encuentros responsables con fauna nativa.", "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1750, "region": "Sudamérica", "country": "Ecuador", "checkout_url": "https://www.wetravel.com/galapagos"},
+            {"id": "ec-cu-cuenca","city": "Cuenca","title": "Cuenca Colonial y Cañari", "longTitle":"Cuenca Colonial y Cañari", "shortDescription": "Arte, arquitectura y pueblos andinos.", "longDescription": "Ruta cultural por el centro histórico, visita a talleres de sombreros y escapada al Parque Nacional Cajas con picnic panorámico.", "image": "https://images.unsplash.com/photo-1526404079166-0f5c6afb67c3?auto=format&fit=crop&w=900&q=80", "priceFrom": 480, "region": "Sudamérica", "country": "Ecuador", "checkout_url": "https://www.wetravel.com/cuenca"}
+          ]
+        },
+        {
+          "name": "Perú",
+          "destinations": [
+            {"id": "pe-cu-cusco","city": "Cusco","title": "Cusco y Machu Picchu", "longTitle":"Cusco y Machu Picchu", "shortDescription": "Patrimonio mundial y valle sagrado.", "longDescription": "Toma el tren panorámico al santuario, disfruta de gastronomía local y vive la cosmovisión andina en comunidades quechuas.", "image": "https://images.unsplash.com/photo-1508261306217-45f8c116b9b7?auto=format&fit=crop&w=900&q=80", "priceFrom": 1390, "region": "Sudamérica", "country": "Perú", "checkout_url": "https://www.wetravel.com/cusco"},
+            {"id": "pe-li-lima","city": "Lima","title": "Lima Foodie y Costa", "longTitle":"Lima Foodie y Costa", "shortDescription": "Ruta nikkei, ceviche y arte urbano.", "longDescription": "Recorre Barranco, degusta en restaurantes premiados y navega hacia las islas Palomino para observar fauna marina.", "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80", "priceFrom": 890, "region": "Sudamérica", "country": "Perú", "checkout_url": "https://www.wetravel.com/lima"},
+            {"id": "pe-ar-arequipa","city": "Arequipa","title": "Arequipa y Cañón del Colca", "longTitle":"Arequipa y Cañón del Colca", "shortDescription": "Monasterios, picanterías y cóndores.", "longDescription": "Disfruta de arquitectura blanca, termas altoandinas y amanecer con vuelo de cóndores en el valle del Colca.", "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80", "priceFrom": 920, "region": "Sudamérica", "country": "Perú", "checkout_url": "https://www.wetravel.com/arequipa"}
+          ]
+        },
+        {
+          "name": "Chile",
+          "destinations": [
+            {"id": "cl-sa-santiago","city": "Santiago","title": "Santiago Andes y Valles", "longTitle":"Santiago Andes y Valles", "shortDescription": "Skyline, viñedos y glaciares.", "longDescription": "Ruta urbana, ascenso al Cajón del Maipo y catas de vino en el Valle de Colchagua con guías certificados.", "image": "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=900&q=80", "priceFrom": 1150, "region": "Sudamérica", "country": "Chile", "checkout_url": "https://www.wetravel.com/santiago"},
+            {"id": "cl-at-atacama","city": "San Pedro de Atacama","title": "Desierto de Atacama Premium", "longTitle":"Desierto de Atacama Premium", "shortDescription": "Valle de la Luna, géiseres y astroturismo.", "longDescription": "Explora lagunas altiplánicas, géiseres del Tatio y observación astronómica con telescopios profesionales.", "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80", "priceFrom": 1650, "region": "Sudamérica", "country": "Chile", "checkout_url": "https://www.wetravel.com/atacama"},
+            {"id": "cl-pa-patagonia","city": "Patagonia","title": "Patagonia Torres del Paine", "longTitle":"Patagonia Torres del Paine", "shortDescription": "Glaciares, trekking y navegación.", "longDescription": "Circuito W asistido con refugios boutique, navegaciones a glaciares y acompañamiento de guías de montaña.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 2490, "region": "Sudamérica", "country": "Chile", "checkout_url": "https://www.wetravel.com/patagonia"}
+          ]
+        },
+        {
+          "name": "Argentina",
+          "destinations": [
+            {"id": "ar-bue-buenosaires","city": "Buenos Aires","title": "Buenos Aires Signature", "longTitle":"Buenos Aires Signature", "shortDescription": "Tango, cultura y gastronomía porteña.", "longDescription": "Tour de barrios icónicos, cena-show de tango y escapada a bodegas boutique en Mendoza.", "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=80", "priceFrom": 980, "region": "Sudamérica", "country": "Argentina", "checkout_url": "https://www.wetravel.com/buenosaires"},
+            {"id": "ar-igu-iguazu","city": "Iguazú","title": "Iguazú Cataratas Deluxe", "longTitle":"Iguazú Cataratas Deluxe", "shortDescription": "Pasarelas, navegaciones y selva.", "longDescription": "Experiencia inmersiva con paseos en lancha, sobrevuelo opcional en helicóptero y lodge sostenible.", "image": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=900&q=80", "priceFrom": 1250, "region": "Sudamérica", "country": "Argentina", "checkout_url": "https://www.wetravel.com/iguazu"},
+            {"id": "ar-bar-bariloche","city": "Bariloche","title": "Lagos y Nieve Bariloche", "longTitle":"Lagos y Nieve Bariloche", "shortDescription": "Cerro Catedral, chocolate y navegaciones.", "longDescription": "Semana blanca con clases privadas de ski, navegación por el Nahuel Huapi y cena gourmet en refugios de montaña.", "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80", "priceFrom": 1320, "region": "Sudamérica", "country": "Argentina", "checkout_url": "https://www.wetravel.com/bariloche"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Centroamérica",
+      "countries": [
+        {
+          "name": "Costa Rica",
+          "destinations": [
+            {"id": "cr-sl-sanjose","city": "San José","title": "San José y Volcanes", "longTitle":"San José y Volcanes", "shortDescription": "Café, volcanes y selva nubosa.", "longDescription": "Degusta café premium, visita el volcán Poás y disfruta canopy en Monteverde con estándares de seguridad.", "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80", "priceFrom": 980, "region": "Centroamérica", "country": "Costa Rica", "checkout_url": "https://www.wetravel.com/costarica"},
+            {"id": "cr-mn-manuel","city": "Manuel Antonio","title": "Manuel Antonio Eco", "longTitle":"Manuel Antonio Eco", "shortDescription": "Playas, fauna y resorts boutique.", "longDescription": "Safari nocturno, avistamiento de perezosos y kayak en manglares con guías naturalistas certificados.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1320, "region": "Centroamérica", "country": "Costa Rica", "checkout_url": "https://www.wetravel.com/manuelantonio"},
+            {"id": "cr-gc-guanacaste","city": "Guanacaste","title": "Guanacaste Luxe", "longTitle":"Guanacaste Luxe", "shortDescription": "Surf, wellness y atardeceres.", "longDescription": "Villas frente al mar, clases de surf privadas y retiros de bienestar con chefs de kilómetro cero.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1680, "region": "Centroamérica", "country": "Costa Rica", "checkout_url": "https://www.wetravel.com/guanacaste"}
+          ]
+        },
+        {
+          "name": "Panamá",
+          "destinations": [
+            {"id": "pa-pt-panama","city": "Ciudad de Panamá","title": "Panamá Skyline & Canal", "longTitle":"Panamá Skyline & Canal", "shortDescription": "Casco Antiguo, biomuseo y canal.", "longDescription": "Tour privado por esclusas del canal, rooftop en Casco Viejo y escapada a islas de San Blas con comunidades Guna Yala.", "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80", "priceFrom": 1100, "region": "Centroamérica", "country": "Panamá", "checkout_url": "https://www.wetravel.com/panama"},
+            {"id": "pa-bl-bocas","city": "Bocas del Toro","title": "Bocas del Toro Boutique", "longTitle":"Bocas del Toro Boutique", "shortDescription": "Overwater lodges y arrecifes.", "longDescription": "Hospédate en cabañas sobre el mar, snorkel en corales protegidos y experiencias culinarias caribeñas.", "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1450, "region": "Centroamérica", "country": "Panamá", "checkout_url": "https://www.wetravel.com/bocas"},
+            {"id": "pa-dv-darien","city": "Darién","title": "Darién Selva Profunda", "longTitle":"Darién Selva Profunda", "shortDescription": "Observación de aves y cultura Emberá.", "longDescription": "Ruta responsable con guías locales, avistamiento de aves endémicas y navegación por ríos selváticos.", "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1580, "region": "Centroamérica", "country": "Panamá", "checkout_url": "https://www.wetravel.com/darien"}
+          ]
+        },
+        {
+          "name": "Guatemala",
+          "destinations": [
+            {"id": "gt-an-antigua","city": "Antigua","title": "Antigua y Volcanes", "longTitle":"Antigua y Volcanes", "shortDescription": "Calles empedradas y hikes premium.", "longDescription": "Caminata al volcán Acatenango con campamento de lujo y cata de cacao ancestral en cooperativas locales.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 980, "region": "Centroamérica", "country": "Guatemala", "checkout_url": "https://www.wetravel.com/antigua"},
+            {"id": "gt-tk-tikal","city": "Tikal","title": "Tikal Sunrise", "longTitle":"Tikal Sunrise", "shortDescription": "Amanecer en templos mayas.", "longDescription": "Ingreso privilegiado al amanecer, guías arqueólogos y glamping en la selva petenera.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1250, "region": "Centroamérica", "country": "Guatemala", "checkout_url": "https://www.wetravel.com/tikal"},
+            {"id": "gt-at-atitlan","city": "Atitlán","title": "Lago Atitlán Boutique", "longTitle":"Lago Atitlán Boutique", "shortDescription": "Lanchas privadas y pueblos mayas.", "longDescription": "Rutas en lancha privada, talleres de textiles y ceremonias mayas respetuosas con líderes comunitarios.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1180, "region": "Centroamérica", "country": "Guatemala", "checkout_url": "https://www.wetravel.com/atitlan"}
+          ]
+        },
+        {
+          "name": "México",
+          "destinations": [
+            {"id": "mx-cd-mexico","city": "CDMX","title": "CDMX Cultural & Food", "longTitle":"CDMX Cultural & Food", "shortDescription": "Museos, mercados y Xochimilco.", "longDescription": "Visita privada a Teotihuacán, cena de autor y trajinera sostenible con mariachi.", "image": "https://images.unsplash.com/photo-1526401485004-2aa7c769f5e6?auto=format&fit=crop&w=900&q=80", "priceFrom": 1050, "region": "Centroamérica", "country": "México", "checkout_url": "https://www.wetravel.com/cdmx"},
+            {"id": "mx-cn-cancun","city": "Cancún","title": "Riviera Maya Elite", "longTitle":"Riviera Maya Elite", "shortDescription": "Cenotes, ruinas y beach clubs.", "longDescription": "Hoteles all-inclusive de lujo, excursión privada a Chichén Itzá y navegación en catamarán al atardecer.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1580, "region": "Centroamérica", "country": "México", "checkout_url": "https://www.wetravel.com/cancun"},
+            {"id": "mx-ox-oaxaca","city": "Oaxaca","title": "Oaxaca Sabores y Mezcal", "longTitle":"Oaxaca Sabores y Mezcal", "shortDescription": "Mercados, artes y mezcal premium.", "longDescription": "Clases de cocina, visita a Hierve el Agua y catas de mezcal en palenques certificados.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1140, "region": "Centroamérica", "country": "México", "checkout_url": "https://www.wetravel.com/oaxaca"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Norteamérica",
+      "countries": [
+        {
+          "name": "Estados Unidos",
+          "destinations": [
+            {"id": "us-ny-newyork","city": "Nueva York","title": "NYC Iconic & Broadway", "longTitle":"NYC Iconic & Broadway", "shortDescription": "Broadway, rooftops y museos.", "longDescription": "Tour privado en helicóptero, reservas en restaurantes Michelin y shows de Broadway premium.", "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "priceFrom": 2150, "region": "Norteamérica", "country": "Estados Unidos", "checkout_url": "https://www.wetravel.com/nyc"},
+            {"id": "us-ca-california","city": "San Francisco","title": "California Pacifica", "longTitle":"California Pacifica", "shortDescription": "Costa Highway 1 y Napa Valley.", "longDescription": "Roadtrip por Big Sur, catas en Napa y experiencia tech en Silicon Valley con guías locales.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 2450, "region": "Norteamérica", "country": "Estados Unidos", "checkout_url": "https://www.wetravel.com/california"},
+            {"id": "us-fl-miami","city": "Miami","title": "Miami Art & Beach", "longTitle":"Miami Art & Beach", "shortDescription": "Arte, beach clubs y Everglades.", "longDescription": "Paseo en yate privado, tour de Wynwood Walls y safari de manglares en los Everglades.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1890, "region": "Norteamérica", "country": "Estados Unidos", "checkout_url": "https://www.wetravel.com/miami"}
+          ]
+        },
+        {
+          "name": "Canadá",
+          "destinations": [
+            {"id": "ca-va-vancouver","city": "Vancouver","title": "Vancouver Naturaleza", "longTitle":"Vancouver Naturaleza", "shortDescription": "Bosques, fiordos y gastronomía pacífica.", "longDescription": "Puente colgante Capilano, crucero por fiordos y sabores asiáticos en mercados locales.", "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1980, "region": "Norteamérica", "country": "Canadá", "checkout_url": "https://www.wetravel.com/vancouver"},
+            {"id": "ca-tm-toronto","city": "Toronto","title": "Toronto Lakeside", "longTitle":"Toronto Lakeside", "shortDescription": "CN Tower, islas y cultura urbana.", "longDescription": "Visita a Niagara con cata de icewine, ferry a Toronto Islands y escena cultural en Distillery District.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1700, "region": "Norteamérica", "country": "Canadá", "checkout_url": "https://www.wetravel.com/toronto"},
+            {"id": "ca-wh-whistler","city": "Whistler","title": "Whistler Aventura", "longTitle":"Whistler Aventura", "shortDescription": "Ski, bike parks y wellness.", "longDescription": "Forfait premium, bike park guiado y spas de montaña con circuitos termales.", "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80", "priceFrom": 2100, "region": "Norteamérica", "country": "Canadá", "checkout_url": "https://www.wetravel.com/whistler"}
+          ]
+        },
+        {
+          "name": "México Norte",
+          "destinations": [
+            {"id": "mx-la-loscabos","city": "Los Cabos","title": "Los Cabos Elite", "longTitle":"Los Cabos Elite", "shortDescription": "Golf, ballenas y resorts.", "longDescription": "Resorts con campos de golf, avistamiento de ballenas y cenas en acantilados.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1750, "region": "Norteamérica", "country": "México", "checkout_url": "https://www.wetravel.com/loscabos"},
+            {"id": "mx-gd-guadalajara","city": "Guadalajara","title": "Guadalajara & Tequila", "longTitle":"Guadalajara & Tequila", "shortDescription": "Mariachi, tequila y diseño.", "longDescription": "Tren Tequila Herradura, mariachis en plazas emblemáticas y ruta de diseño tapatío.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1220, "region": "Norteamérica", "country": "México", "checkout_url": "https://www.wetravel.com/guadalajara"},
+            {"id": "mx-mt-monterrey","city": "Monterrey","title": "Monterrey Outdoor", "longTitle":"Monterrey Outdoor", "shortDescription": "Cañones, gastronomía norteña y arte.", "longDescription": "Excursión a la Huasteca, via ferrata en Chipinque y restaurantes de autor regiomontanos.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1180, "region": "Norteamérica", "country": "México", "checkout_url": "https://www.wetravel.com/monterrey"}
+          ]
+        },
+        {
+          "name": "Caribe USA",
+          "destinations": [
+            {"id": "us-vi-stthomas","city": "St. Thomas","title": "Islas Vírgenes Lujo", "longTitle":"Islas Vírgenes Lujo", "shortDescription": "Yates, snorkel y boutiques duty-free.", "longDescription": "Chartas de yate, arrecifes de coral y compras exclusivas en Charlotte Amalie.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 2250, "region": "Norteamérica", "country": "Estados Unidos", "checkout_url": "https://www.wetravel.com/stthomas"},
+            {"id": "us-hi-hawaii","city": "Honolulu","title": "Hawaii Aloha", "longTitle":"Hawaii Aloha", "shortDescription": "Surf, volcanes y luaus.", "longDescription": "Clases de surf en Waikiki, vuelo sobre volcanes y luaus tradicionales con autenticidad cultural.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 2650, "region": "Norteamérica", "country": "Estados Unidos", "checkout_url": "https://www.wetravel.com/hawaii"},
+            {"id": "us-al-alaska","city": "Anchorage","title": "Alaska Expedición", "longTitle":"Alaska Expedición", "shortDescription": "Glaciares, auroras y fauna ártica.", "longDescription": "Cruceros entre glaciares, avistamiento de auroras boreales y alojamiento en lodges sostenibles.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 2890, "region": "Norteamérica", "country": "Estados Unidos", "checkout_url": "https://www.wetravel.com/alaska"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Europa",
+      "countries": [
+        {
+          "name": "España",
+          "destinations": [
+            {"id": "es-ma-madrid","city": "Madrid","title": "Madrid Cultural & Tapas", "longTitle":"Madrid Cultural & Tapas", "shortDescription": "Museos, tapas y rooftops.", "longDescription": "Paseo por el Triángulo del Arte, ruta de tapas en barrios locales y espectáculo de flamenco contemporáneo.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1290, "region": "Europa", "country": "España", "checkout_url": "https://www.wetravel.com/madrid"},
+            {"id": "es-ba-barcelona","city": "Barcelona","title": "Barcelona Mediterránea", "longTitle":"Barcelona Mediterránea", "shortDescription": "Modernismo, playas y diseño.", "longDescription": "Recorre la Sagrada Familia al amanecer, paseo en vela por el Mediterráneo y mercados creativos en el Born.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1420, "region": "Europa", "country": "España", "checkout_url": "https://www.wetravel.com/barcelona"},
+            {"id": "es-ma-mallorca","city": "Mallorca","title": "Mallorca Slow", "longTitle":"Mallorca Slow", "shortDescription": "Calas secretas y fincas boutique.", "longDescription": "Ruta de calas en llaüt tradicional, fincas agroturismo y degustación de aceite de oliva DO.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1550, "region": "Europa", "country": "España", "checkout_url": "https://www.wetravel.com/mallorca"}
+          ]
+        },
+        {
+          "name": "Francia",
+          "destinations": [
+            {"id": "fr-pa-paris","city": "París","title": "París Iconic", "longTitle":"París Iconic", "shortDescription": "Arte, moda y pastelería.", "longDescription": "Tour privado por el Louvre, desfile independiente y degustación de pastelería con chefs MOF.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1890, "region": "Europa", "country": "Francia", "checkout_url": "https://www.wetravel.com/paris"},
+            {"id": "fr-ly-lyon","city": "Lyon","title": "Lyon Gourmet", "longTitle":"Lyon Gourmet", "shortDescription": "Bouchons, ródano y viñedos.", "longDescription": "Recorrido por traboules, almuerzo en bouchons tradicionales y cata en Côte du Rhône.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1580, "region": "Europa", "country": "Francia", "checkout_url": "https://www.wetravel.com/lyon"},
+            {"id": "fr-ni-niza","city": "Niza","title": "Costa Azul Chic", "longTitle":"Costa Azul Chic", "shortDescription": "Promenade, arte y yates.", "longDescription": "Museo Matisse, day trip a Mónaco y navegación en yate por la Riviera francesa.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1990, "region": "Europa", "country": "Francia", "checkout_url": "https://www.wetravel.com/niza"}
+          ]
+        },
+        {
+          "name": "Italia",
+          "destinations": [
+            {"id": "it-ro-roma","city": "Roma","title": "Roma Eterna", "longTitle":"Roma Eterna", "shortDescription": "Historia, gelato y terrazas.", "longDescription": "Coliseo backstage, paseos en vespa y cenas en rooftops con vista al Vaticano.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1650, "region": "Europa", "country": "Italia", "checkout_url": "https://www.wetravel.com/roma"},
+            {"id": "it-fl-firenze","city": "Florencia","title": "Florencia Renacentista", "longTitle":"Florencia Renacentista", "shortDescription": "Arte, enotecas y artesanía.", "longDescription": "Visitas guiadas en museos sin filas, talleres de cuero y cata en viñedos de Chianti.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1590, "region": "Europa", "country": "Italia", "checkout_url": "https://www.wetravel.com/florencia"},
+            {"id": "it-ve-venecia","city": "Venecia","title": "Venecia Auténtica", "longTitle":"Venecia Auténtica", "shortDescription": "Góndolas, islas y ópera.", "longDescription": "Recorrido en góndola tradicional, Murano y Burano, y noche de ópera en teatro histórico.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1780, "region": "Europa", "country": "Italia", "checkout_url": "https://www.wetravel.com/venecia"}
+          ]
+        },
+        {
+          "name": "Reino Unido",
+          "destinations": [
+            {"id": "uk-lo-londres","city": "Londres","title": "Londres Iconos & Thames", "longTitle":"Londres Iconos & Thames", "shortDescription": "Museos, teatros y afternoon tea.", "longDescription": "Crucero privado por el Támesis, experiencias en West End y visitas VIP a museos.", "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "priceFrom": 1980, "region": "Europa", "country": "Reino Unido", "checkout_url": "https://www.wetravel.com/londres"},
+            {"id": "uk-ed-edimburgo","city": "Edimburgo","title": "Edimburgo Highlands", "longTitle":"Edimburgo Highlands", "shortDescription": "Castillos, whisky y acantilados.", "longDescription": "Tour de castillos, cata en destilerías y excursión a los Highlands con guías locales.", "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "priceFrom": 1720, "region": "Europa", "country": "Reino Unido", "checkout_url": "https://www.wetravel.com/edimburgo"},
+            {"id": "uk-du-dublin","city": "Dublín","title": "Dublín Literario", "longTitle":"Dublín Literario", "shortDescription": "Pubs, literatura y acantilados.", "longDescription": "Ruta de escritores, Guinness Storehouse VIP y excursión a los Cliffs of Moher.", "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80", "priceFrom": 1680, "region": "Europa", "country": "Reino Unido", "checkout_url": "https://www.wetravel.com/dublin"}
+          ]
+        }
+      ]
+    }
+  ],
+  "promotions": [
+    {"id":"promo-galapagos","title":"Galápagos Explorador 2x1", "description":"Reserva con flexibilidad y recibe traslado privado + upgrade de cabina.", "image":"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80", "price": 1490, "oldPrice": 1890, "discount":"-21%", "checkout_url":"https://www.wetravel.com/galapagos"},
+    {"id":"promo-riviera","title":"Riviera Maya All Access", "description":"Cenotes privados, concierge 24/7 y crédito de spa incluido.", "image":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80", "price": 1290, "oldPrice": 1640, "discount":"-21%", "checkout_url":"https://www.wetravel.com/cancun"},
+    {"id":"promo-paris","title":"París Weekend Deluxe", "description":"Traslados ejecutivos, picnic en jardines reales y sesión de fotos profesional.", "image":"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80", "price": 990, "oldPrice": 1290, "discount":"-23%", "checkout_url":"https://www.wetravel.com/paris"},
+    {"id":"promo-machu","title":"Machu Picchu Sunrise", "description":"Ticket de amanecer, lodge boutique y guía privado quechua-español.", "image":"https://images.unsplash.com/photo-1508261306217-45f8c116b9b7?auto=format&fit=crop&w=900&q=80", "price": 1250, "oldPrice": 1590, "discount":"-21%", "checkout_url":"https://www.wetravel.com/cusco"}
+  ]
+}
