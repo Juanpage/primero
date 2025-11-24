@@ -1,0 +1,11 @@
+{
+  "name": "visiting-world",
+  "version": "1.0.0",
+  "description": "Sitio estático accesible y optimizado para Visiting World",
+  "scripts": {
+    "start": "npx serve .",
+    "lint": "echo 'Add linters here'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

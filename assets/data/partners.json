@@ -1,0 +1,14 @@
+[
+  {"name": "WeTravel", "logo": "https://dummyimage.com/160x80/1b4965/ffffff&text=WeTravel", "url": "https://www.wetravel.com"},
+  {"name": "LATAM", "logo": "https://dummyimage.com/160x80/0b7a75/ffffff&text=LATAM", "url": "https://www.latam.com"},
+  {"name": "Marriott", "logo": "https://dummyimage.com/160x80/f0ad4e/0f172a&text=Marriott", "url": "https://www.marriott.com"},
+  {"name": "Hilton", "logo": "https://dummyimage.com/160x80/1b4965/ffffff&text=Hilton", "url": "https://www.hilton.com"},
+  {"name": "Avianca", "logo": "https://dummyimage.com/160x80/0b7a75/ffffff&text=Avianca", "url": "https://www.avianca.com"},
+  {"name": "Iberia", "logo": "https://dummyimage.com/160x80/f0ad4e/0f172a&text=Iberia", "url": "https://www.iberia.com"},
+  {"name": "Delta", "logo": "https://dummyimage.com/160x80/1b4965/ffffff&text=Delta", "url": "https://www.delta.com"},
+  {"name": "Booking", "logo": "https://dummyimage.com/160x80/0b7a75/ffffff&text=Booking", "url": "https://www.booking.com"},
+  {"name": "Expedia", "logo": "https://dummyimage.com/160x80/f0ad4e/0f172a&text=Expedia", "url": "https://www.expedia.com"},
+  {"name": "Visa", "logo": "https://dummyimage.com/160x80/1b4965/ffffff&text=Visa", "url": "https://www.visa.com"},
+  {"name": "Mastercard", "logo": "https://dummyimage.com/160x80/0b7a75/ffffff&text=Mastercard", "url": "https://www.mastercard.com"},
+  {"name": "Amadeus", "logo": "https://dummyimage.com/160x80/f0ad4e/0f172a&text=Amadeus", "url": "https://amadeus.com"}
+]

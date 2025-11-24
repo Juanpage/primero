@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Visiting World</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+</head>
+<body>
+  <div data-include="/components/header.html"></div>
+  <main class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1 class="section__title">Blog Visiting World</h1>
+        <p class="section__subtitle">Historias, recomendaciones y protocolos para viajeros conscientes.</p>
+      </div>
+      <div class="blog-grid" id="blog-grid" aria-live="polite"></div>
+    </div>
+  </main>
+  <div data-include="/components/footer.html"></div>
+  <script src="/assets/js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-include]').forEach(async (el) => {
+        const res = await fetch(el.getAttribute('data-include'));
+        el.outerHTML = await res.text();
+      });
+    });
+  </script>
+</body>
+</html>
