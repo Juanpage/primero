@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visiting World - Experiencias Cinematográficas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <video autoplay muted loop playsinline poster="assets/img/destinations/galapagos.svg">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+    <div class="hero-content">
+      <span class="badge">Travel. Film. Luxury.</span>
+      <h1>Explora destinos icónicos con una producción cinematográfica</h1>
+      <p>Diseñamos viajes premium con logística impecable, storytellers locales y reservas seguras vía WeTravel Checkout.</p>
+      <div>
+        <a class="btn" href="#destinations">Explorar Destinos</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="destinations" class="destinations">
+      <div class="background-slider" id="destinations-background"></div>
+      <div class="section-title">
+        <div>
+          <span class="badge">Destinos curados</span>
+          <h2>Escenarios de película listos para tu próximo viaje</h2>
+        </div>
+        <p>Reservas confirmadas con <strong>WeTravel Checkout</strong> y soporte 24/7.</p>
+      </div>
+      <div class="grid" id="destinations-grid"></div>
+    </section>
+
+    <section class="promotions" id="promotions">
+      <div class="section-title">
+        <div>
+          <span class="badge">Promociones</span>
+          <h2>Paquetes en lanzamiento con pago inmediato</h2>
+        </div>
+        <p>Tarifas dinámicas, itinerarios descargables y checkout seguro.</p>
+      </div>
+      <div class="swiper">
+        <div class="swiper-wrapper" id="promotions-wrapper"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <section class="partners">
+      <div class="section-title">
+        <div>
+          <span class="badge">Socios estratégicos</span>
+          <h2>Marcas que respaldan cada producción</h2>
+        </div>
+        <p>Operadores, aerolíneas y hoteles premium.</p>
+      </div>
+      <div class="partner-marquee">
+        <div class="partner-track" id="partner-track"></div>
+        <div class="partner-track" id="partner-track-duplicate"></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div>
+        <span class="badge">Contacto</span>
+        <h2>Hablemos de tu próximo rodaje viajero</h2>
+        <p>Cuéntanos tus fechas, aforo y estilo. Nuestro equipo responderá en minutos.</p>
+      </div>
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input type="text" id="name" name="name" placeholder="Nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="email@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" placeholder="Cuéntanos el viaje ideal" required></textarea>
+        </div>
+        <button type="submit" class="btn">Enviar mensaje</button>
+        <div class="alert" id="contact-alert">Mensaje listo. Nuestro concierge te contactará.</div>
+      </form>
+    </section>
+  </main>
+
+  <div class="modal" id="destination-modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <div id="destination-modal-body"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="quote-modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <h3>Solicitar cotización</h3>
+      <form id="quote-form">
+        <div class="form-group">
+          <label for="quote-name">Nombre</label>
+          <input type="text" id="quote-name" name="quote-name" required>
+        </div>
+        <div class="form-group">
+          <label for="quote-email">Email</label>
+          <input type="email" id="quote-email" name="quote-email" required>
+        </div>
+        <div class="form-group">
+          <label for="quote-date">Fecha</label>
+          <input type="date" id="quote-date" name="quote-date" required>
+        </div>
+        <div class="form-group">
+          <label for="quote-people">Número de personas</label>
+          <input type="number" id="quote-people" name="quote-people" min="1" value="2" required>
+        </div>
+        <button type="submit" class="btn">Enviar cotización</button>
+        <div class="alert" id="quote-alert">Cotización registrada. Responderemos con prioridad.</div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal pdf-viewer" id="pdf-modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <h3>Ver itinerario</h3>
+      <iframe id="pdf-frame" src="" title="Itinerario"></iframe>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
