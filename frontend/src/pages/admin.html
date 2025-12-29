@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Visiting Galapagos Feedback</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <div id="admin-lock">
+    <div class="card">
+      <h2>Admin Access</h2>
+      <p>Please enter the dashboard password.</p>
+      <input type="password" id="admin-password" placeholder="Password" />
+      <div class="actions">
+        <button class="button" id="unlock-btn">Enter dashboard</button>
+      </div>
+      <div id="lock-error" class="error"></div>
+    </div>
+  </div>
+
+  <header>
+    <h1>Guest Feedback Dashboard</h1>
+  </header>
+  <main>
+    <section class="notice">
+      Monitor guest sentiment across vessels. Use filters to focus on specific departures.
+    </section>
+
+    <section>
+      <h2 class="section-title">Filters</h2>
+      <div class="form-grid">
+        <div>
+          <label for="filter-vessel">Vessel</label>
+          <select id="filter-vessel">
+            <option value="">All vessels</option>
+            <option value="LETTY">LETTY</option>
+            <option value="CALIPSO">CALIPSO</option>
+            <option value="NAREL">NAREL</option>
+          </select>
+        </div>
+        <div>
+          <label for="filter-date">Cruise date</label>
+          <input type="date" id="filter-date" />
+        </div>
+        <div style="align-self: end;">
+          <button class="button" id="apply-filters">Apply filters</button>
+          <button class="button" id="export-csv" style="margin-left: 8px;">Export CSV</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Overview</h2>
+      <div class="admin-grid">
+        <div class="metric-card">
+          <h3>Total responses</h3>
+          <p id="metric-total">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Average rating</h3>
+          <p id="metric-rating">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Average NPS</h3>
+          <p id="metric-nps">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Responses in last 30 days</h3>
+          <p id="metric-last">0</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Recent feedback</h2>
+      <div class="table-wrapper">
+        <table class="table-sm" id="recent-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Vessel</th>
+              <th>Nationality</th>
+              <th>Cruise date</th>
+              <th>Cabin</th>
+              <th>Rating</th>
+              <th>NPS</th>
+              <th>Submitted</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>
