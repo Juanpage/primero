@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | VisitingAlapagos</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <main class="card admin">
+    <header class="header">
+      <h1>Panel de feedback</h1>
+      <p>Demo protegido con contraseña simple.</p>
+    </header>
+
+    <section id="login-section" class="form-section">
+      <label for="admin-password">Contraseña</label>
+      <input type="password" id="admin-password" placeholder="Ingresa la clave" />
+      <button id="login-btn" class="primary">Ingresar</button>
+      <p class="helper">Uso interno; no almacena datos personales.</p>
+    </section>
+
+    <section id="metrics" class="hidden">
+      <div class="stats-grid">
+        <div class="stat">
+          <p>Total respuestas</p>
+          <strong id="total-responses">-</strong>
+        </div>
+        <div class="stat">
+          <p>Promedio rating</p>
+          <strong id="avg-rating">-</strong>
+        </div>
+        <div class="stat">
+          <p>Promedio NPS</p>
+          <strong id="avg-nps">-</strong>
+        </div>
+        <div class="stat">
+          <p>Últimos 30 días</p>
+          <strong id="last-30">-</strong>
+        </div>
+      </div>
+
+      <h2>Por embarcación</h2>
+      <table id="vessel-table">
+        <thead>
+          <tr>
+            <th>Embarcación</th>
+            <th>Respuestas</th>
+            <th>Rating</th>
+            <th>NPS</th>
+            <th>Últimos 30 días</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="actions">
+        <button id="export-btn" class="primary">Exportar CSV</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>

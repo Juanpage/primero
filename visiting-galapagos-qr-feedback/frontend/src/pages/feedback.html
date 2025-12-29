@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback | VisitingAlapagos</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <main class="card">
+    <header class="header">
+      <h1>¿Cómo estuvo tu experiencia?</h1>
+      <p>Tu opinión nos ayuda a mejorar el servicio a bordo.</p>
+    </header>
+
+    <form id="feedback-form" class="form">
+      <input type="hidden" id="vessel_id" name="vessel_id" />
+
+      <section class="form-section">
+        <h2>Calificación general</h2>
+        <div class="stars" id="rating_general" aria-label="Calificación general"></div>
+      </section>
+
+      <section class="form-section">
+        <h2>¿Qué tan probable es que nos recomiendes?</h2>
+        <div class="nps" id="nps-options"></div>
+        <div class="nps-labels"><span>0</span><span>10</span></div>
+      </section>
+
+      <section class="form-section grid">
+        <div>
+          <label for="guide_score">Guía</label>
+          <select id="guide_score" name="guide_score">
+            <option value="">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div>
+          <label for="punctuality_score">Puntualidad</label>
+          <select id="punctuality_score" name="punctuality_score">
+            <option value="">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div>
+          <label for="organization_score">Organización</label>
+          <select id="organization_score" name="organization_score">
+            <option value="">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div>
+          <label for="safety_score">Seguridad</label>
+          <select id="safety_score" name="safety_score">
+            <option value="">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <label for="best_part">¿Qué fue lo mejor del recorrido?</label>
+        <textarea id="best_part" name="best_part" rows="2" placeholder="Es opcional, pero nos ayuda"></textarea>
+      </section>
+
+      <section class="form-section">
+        <label for="improvement">¿Qué podemos mejorar?</label>
+        <textarea id="improvement" name="improvement" rows="2" placeholder="Queremos seguir mejorando"></textarea>
+      </section>
+
+      <button type="submit" class="primary">Enviar</button>
+      <p class="helper">No pedimos datos personales. Completar toma menos de 1 minuto.</p>
+    </form>
+  </main>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/feedback.js"></script>
+</body>
+</html>
