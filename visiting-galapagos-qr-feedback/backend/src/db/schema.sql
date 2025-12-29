@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS feedback (
   id BIGSERIAL PRIMARY KEY,
   vessel_id TEXT NOT NULL,
+  nationality TEXT NOT NULL DEFAULT 'UNKNOWN',
   guide_id TEXT,
   crew_id TEXT,
   service_type TEXT,
@@ -15,6 +16,14 @@ CREATE TABLE IF NOT EXISTS feedback (
   improvement TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+ALTER TABLE feedback
+  ADD COLUMN IF NOT EXISTS nationality TEXT;
+
+UPDATE feedback SET nationality = COALESCE(nationality, 'UNKNOWN');
+
+ALTER TABLE feedback ALTER COLUMN nationality SET NOT NULL;
+ALTER TABLE feedback ALTER COLUMN nationality SET DEFAULT 'UNKNOWN';
 
 CREATE INDEX IF NOT EXISTS feedback_created_at_idx ON feedback (created_at);
 CREATE INDEX IF NOT EXISTS feedback_vessel_id_idx ON feedback (vessel_id);
