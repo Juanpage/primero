@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback - Visiting Galápagos</title>
+  <link rel="stylesheet" href="../assets/css/feedback.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Cuéntanos tu experiencia</h1>
+    <p class="subtitle">Tu feedback nos ayuda a mejorar.</p>
+
+    <div id="qr-error" class="error hidden"></div>
+
+    <form id="feedback-form" class="card">
+      <label>
+        Calificación
+        <select name="rating" required>
+          <option value="">Selecciona...</option>
+          <option value="5">5 - Excelente</option>
+          <option value="4">4 - Bueno</option>
+          <option value="3">3 - Regular</option>
+          <option value="2">2 - Malo</option>
+          <option value="1">1 - Muy malo</option>
+        </select>
+      </label>
+
+      <label>
+        Comentario (opcional)
+        <textarea name="comment" rows="4" maxlength="1000"></textarea>
+      </label>
+
+      <label>
+        Email (opcional)
+        <input type="email" name="email" maxlength="320" placeholder="correo@ejemplo.com" />
+      </label>
+
+      <button type="submit">Enviar feedback</button>
+    </form>
+  </main>
+
+  <script src="../assets/js/feedback.js"></script>
+</body>
+</html>
